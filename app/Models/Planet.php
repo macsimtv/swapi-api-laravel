@@ -21,9 +21,6 @@ class Planet extends Model
 		"terrain",
 		"surface_water",
 		"population",
-		"residents",
-		"films",
-		"edited",
 		"url"
 	];
 
