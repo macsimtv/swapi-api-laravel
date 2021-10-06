@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\PivotPeopleStarship;
+use App\Models\Starship;
 use App\Models\Film;
 use App\Models\PivotPeopleFilm;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,4 +44,22 @@ class People extends Model
 	{
 		return $this->hasMany(PivotPeopleVehicle::class);
 	}
+
+    public function starships()
+    {
+        return $this->belongsToMany(Starship::class);
+    }
+    public function people_starships()
+    {
+        return $this->hasMany(PivotPeopleStarship::class);
+    }
+
+	public function species()
+    {
+        return $this->belongsToMany(Specie::class);
+    }
+    public function people_species()
+    {
+        return $this->hasMany(PivotPeopleSpecie::class);
+    }
 }
