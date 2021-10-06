@@ -6,29 +6,35 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePivotPeopleFilmsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('pivot_people_films', function (Blueprint $table) {
-            $table->timestamps();
-            $table->unsignedBigInteger('people_id');
-           // $table->foreign('people_id')->references('id')->on('people');
-            $table->unsignedBigInteger('film_id');
-           // $table->foreign('film_id')->references('id')->on('film');
-        });
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('pivot_people_films', function (Blueprint $table) {
+			$table->timestamps();
+			$table->unsignedBigInteger('people_id');
+			$table->unsignedBigInteger('film_id');
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('pivot_people_films');
-    }
+			$table->foreign('people_id')->references('id')->on('peoples')
+				->onDelete('cascade')
+				->onUpdate('cascade');
+
+			$table->foreign('film_id')->references('id')->on('films')
+				->onDelete('cascade')
+				->onUpdate('cascade');
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('pivot_people_films');
+	}
 }

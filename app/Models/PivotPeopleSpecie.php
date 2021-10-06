@@ -18,6 +18,6 @@ class PivotPeopleSpecie extends Model
 
 	public function specie()
 	{
-		return $this->belongsTo(specie::class);
+		return $this->belongsTo(Specie::class);
 	}
 }
