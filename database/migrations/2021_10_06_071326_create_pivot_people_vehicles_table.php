@@ -17,6 +17,9 @@ class CreatePivotPeopleVehiclesTable extends Migration
 			$table->timestamps();
 			$table->unsignedBigInteger('people_id');
 			$table->unsignedBigInteger('vehicle_id');
+
+			$table->foreign('people_id')->references('id')->on('peoples');
+			$table->foreign('vehicle_id')->references('id')->on('vehicles');
 		});
 	}
 
