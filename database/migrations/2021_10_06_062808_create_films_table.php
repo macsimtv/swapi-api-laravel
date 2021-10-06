@@ -18,7 +18,7 @@ class CreateFilmsTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->integer('episode_id');
-            $table->string('opening_crawl');
+            $table->text('opening_crawl');
             $table->string('director');
             $table->string('producer');
             $table->date('release_date');
