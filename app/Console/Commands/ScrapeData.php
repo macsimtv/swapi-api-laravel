@@ -2,9 +2,15 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Film;
+use App\Models\People;
 use App\Models\Planet;
+<<<<<<< HEAD
 use App\Models\Starship;
 use App\Models\Specie;
+=======
+use App\Models\Vehicle;
+>>>>>>> a0f9aede3bcbbbde043e01595a2bb9576787669d
 use Illuminate\Support\Facades\Http;
 use Illuminate\Console\Command;
 
@@ -83,10 +89,65 @@ class ScrapeData extends Command
 					}
 				}
 				if ($endpoint == "https://swapi.dev/api/vehicles/") {
+					$find = Vehicle::where('name', $res['name'])->first();
+					if (!$find) {
+						$vehicle = new Vehicle();
+						$vehicle->name = $res['name'];
+						$vehicle->model = $res['model'];
+						$vehicle->manufacturer = $res['manufacturer'];
+						$vehicle->cost_in_credits = $res['cost_in_credits'];
+						$vehicle->length = $res['length'];
+						$vehicle->max_atmosphering_speed = $res['max_atmosphering_speed'];
+						$vehicle->crew = $res['crew'];
+						$vehicle->passengers = $res['passengers'];
+						$vehicle->cargo_capacity = $res['cargo_capacity'];
+						$vehicle->consumables = $res['consumables'];
+						$vehicle->vehicle_class = $res['vehicle_class'];
+						$vehicle->created_at = $res['created'];
+						$vehicle->updated_at = $res['edited'];
+						$vehicle->save();
+						echo $i . "boom \n";
+					} else {
+						echo $i . "pas boom \n";
+					}
 				}
 				if ($endpoint == "https://swapi.dev/api/people/") {
+					$find_people = People::where('name', $res['name'])->first();
+					if (!$find_people) {
+						$people = new People();
+						$people->name = $res['name'];
+						$people->height = $res['height'];
+						$people->mass = $res['mass'];
+						$people->hair_color = $res['hair_color'];
+						$people->skin_color = $res['skin_color'];
+						$people->eye_color = $res['eye_color'];
+						$people->birth_year = $res['birth_year'];
+						$people->gender = $res['gender'];
+						$people->created_at = $res['created'];
+						$people->updated_at = $res['edited'];
+						$people->save();
+						echo $i . "boom \n";
+					} else {
+						echo $i . "pas boom \n";
+					}
 				}
 				if ($endpoint == "https://swapi.dev/api/films/") {
+					$find_film = Film::where('title', $res['title'])->first();
+					if (!$find_film) {
+						$film = new Film();
+						$film->title = $res['title'];
+						$film->episode_id = $res['episode_id'];
+						$film->opening_crawl = $res['opening_crawl'];
+						$film->director = $res['director'];
+						$film->producer = $res['producer'];
+						$film->release_date = $res['release_date'];
+						$film->created_at = $res['created'];
+						$film->updated_at = $res['edited'];
+						$film->save();
+						echo $i . "boom \n";
+					} else {
+						echo $i . "pas boom \n";
+					}
 				}
 				if ($endpoint == "https://swapi.dev/api/starships/") {
 
