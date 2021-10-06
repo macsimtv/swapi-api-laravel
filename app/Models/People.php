@@ -58,4 +58,13 @@ class People extends Model
     {
         return $this->hasMany(PivotPeopleStarship::class);
     }
+
+	public function species()
+    {
+        return $this->belongsToMany(Specie::class);
+    }
+    public function people_species()
+    {
+        return $this->hasMany(PivotPeopleSpecie::class);
+    }
 }
