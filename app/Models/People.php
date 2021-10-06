@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Film;
+use App\Models\PivotPeopleFilm;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,4 +27,13 @@ class People extends Model
         "edited",
         "url"
     ];
+
+    public function films()
+    {
+        return $this->belongsToMany(Film::class);
+    }
+    public function people_films()
+    {
+        return $this->hasMany(PivotPeopleFilm::class);
+    }
 }

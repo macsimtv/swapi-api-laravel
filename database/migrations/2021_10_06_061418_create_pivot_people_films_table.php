@@ -14,12 +14,11 @@ class CreatePivotPeopleFilmsTable extends Migration
     public function up()
     {
         Schema::create('pivot_people_films', function (Blueprint $table) {
-            $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('people_id');
-            $table->foreign('people_id')->references('id')->on('people');
+           // $table->foreign('people_id')->references('id')->on('people');
             $table->unsignedBigInteger('film_id');
-            $table->foreign('film_id')->references('id')->on('film');
+           // $table->foreign('film_id')->references('id')->on('film');
         });
     }
 
