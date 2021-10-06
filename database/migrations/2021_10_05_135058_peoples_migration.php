@@ -24,7 +24,7 @@ class PeoplesMigration extends Migration
             $table->string('birth_year');
             $table->string('gender');
             $table->string('homeworld');
-            $table->string('films');
+            $table->unsignedBigInteger('films');
             $table->string('species');
             $table->string('vehicles');
             $table->string('starships');
