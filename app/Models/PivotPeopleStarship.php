@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class PivotPeopleStarship extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function people(){
-        return $this->belongsTo(People::class);
-    }
+	public function people()
+	{
+		return $this->belongsTo(People::class);
+	}
 
-    public function starship(){
-        return $this->belongsTo(starship::class);
-    }
-
-
+	public function starship()
+	{
+		return $this->belongsTo(Starship::class);
+	}
 }

@@ -9,31 +9,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Specie extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $fillable = [
-        "name",
-        "classification",
-        "designation",
-        "average_height",
-        "skin_colors",
-        "hair_colors",
-        "eye_colors",
-        "average_lifespan",
-        "homeworld",
-        "language",
-        "created",
-        "edited",
-        "url"
-    ];
+	protected $fillable = [
+		"name",
+		"classification",
+		"designation",
+		"average_height",
+		"skin_colors",
+		"hair_colors",
+		"eye_colors",
+		"average_lifespan",
+		"homeworld",
+		"language",
+		"created",
+		"edited",
+		"url"
+	];
 
-    public function peoples()
-    {
-        return $this->belongsToMany(People::class);
-    }
-    public function people_species()
-    {
-        return $this->hasMany(PivotPeopleSpecie::class);
-    }
-
+	public function peoples()
+	{
+		return $this->hasMany(PivotPeopleSpecie::class);
+	}
 }

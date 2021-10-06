@@ -25,10 +25,6 @@ class Vehicle extends Model
 
 	public function peoples()
 	{
-		return $this->belongsToMany(People::class);
-	}
-	public function people_vehicles()
-	{
 		return $this->hasMany(PivotPeopleVehicle::class);
 	}
 }

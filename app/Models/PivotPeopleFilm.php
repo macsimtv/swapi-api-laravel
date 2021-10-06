@@ -12,6 +12,7 @@ class PivotPeopleFilm extends Model
 	protected $table = "pivot_people_films";
 
 	use HasFactory;
+
 	public function people()
 	{
 		return $this->belongsTo(People::class);

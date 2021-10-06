@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class PivotPeopleSpecie extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function people(){
-        return $this->belongsTo(People::class);
-    }
+	public function people()
+	{
+		return $this->belongsTo(People::class);
+	}
 
-    public function specie(){
-        return $this->belongsTo(specie::class);
-    }
+	public function specie()
+	{
+		return $this->belongsTo(specie::class);
+	}
 }

@@ -9,34 +9,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Starships extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $fillable = [
-        "name",
-        "model",
-        "manufacturer",
-        "cost_in_credits",
-        "length",
-        "max_atmosphering_speed",
-        "crew",
-        "passengers",
-        "cargo_capacity",
-        "consumables",
-        "hyperdrive_rating",
-        "MGLT",
-        "starship_class",
-        "created",
-        "edited",
-        "url"
-    ];
+	protected $fillable = [
+		"name",
+		"model",
+		"manufacturer",
+		"cost_in_credits",
+		"length",
+		"max_atmosphering_speed",
+		"crew",
+		"passengers",
+		"cargo_capacity",
+		"consumables",
+		"hyperdrive_rating",
+		"MGLT",
+		"starship_class",
+		"created",
+		"edited",
+		"url"
+	];
 
-    public function peoples()
-    {
-        return $this->belongsToMany(People::class);
-    }
-    public function people_starships()
-    {
-        return $this->hasMany(PivotPeopleStarship::class);
-    }
-
+	public function peoples()
+	{
+		return $this->hasMany(PivotPeopleStarship::class);
+	}
 }

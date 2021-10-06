@@ -13,6 +13,8 @@ class People extends Model
 {
 	use HasFactory;
 
+	protected $table = "peoples";
+
 	protected $fillable = [
 		"name",
 		"height",
@@ -31,35 +33,27 @@ class People extends Model
 		"url"
 	];
 
-	protected $table = "peoples";
-
-	//films
+	// Films
 	public function films()
 	{
 		return $this->hasMany(PivotPeopleFilm::class);
 	}
 
-	//vehicles
+	// Vehicles
 	public function vehicles()
 	{
 		return $this->hasMany(PivotPeopleVehicle::class);
 	}
 
-    public function starships()
-    {
-        return $this->belongsToMany(Starship::class);
-    }
-    public function people_starships()
-    {
-        return $this->hasMany(PivotPeopleStarship::class);
-    }
+	// Starships
+	public function starships()
+	{
+		return $this->hasMany(PivotPeopleStarship::class);
+	}
 
+	// Species
 	public function species()
-    {
-        return $this->belongsToMany(Specie::class);
-    }
-    public function people_species()
-    {
-        return $this->hasMany(PivotPeopleSpecie::class);
-    }
+	{
+		return $this->hasMany(PivotPeopleSpecie::class);
+	}
 }
