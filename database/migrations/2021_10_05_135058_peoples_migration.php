@@ -15,17 +15,16 @@ class PeoplesMigration extends Migration
 	{
 		Schema::create('peoples', function (Blueprint $table) {
 			$table->id();
-			$table->timestamps();
-			$table->string('name');
-			$table->integer('height');
-			$table->integer('mass');
+			$table->string('name')->unique();
+			$table->string('height');
+			$table->string('mass');
 			$table->string('hair_color');
 			$table->string('skin_color');
 			$table->string('eye_color');
 			$table->string('birth_year');
 			$table->string('gender');
-			$table->string('homeworld');
-			$table->string('url');
+			$table->timestamps();
+			$table->string('url')->nullable();
 		});
 	}
 
