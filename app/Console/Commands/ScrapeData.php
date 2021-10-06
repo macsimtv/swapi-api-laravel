@@ -148,29 +148,6 @@ class ScrapeData extends Command
 				}
 				if ($endpoint == "https://swapi.dev/api/starships/") {
 
-					$find_specie = Specie::where('name', $res['name'])->first();
-					if (!$find_specie) {
-						$specie = new Specie();
-						$specie->name = $res['name'];
-						$specie->classification = $res['classification'];
-						$specie->designation = $res['designation'];
-						$specie->average_height = $res['average_height'];
-						$specie->skin_colors = $res['skin_colors'];
-						$specie->hair_colors = $res['hair_colors'];
-						$specie->eye_colors = $res['eye_colors'];
-						$specie->average_lifespan = $res['average_lifespan'];
-						$specie->homeworld = $res['homeworld'];
-						$specie->language = $res['language'];
-						$specie->created_at = $res['created'];
-						$specie->updated_at = $res['edited'];
-						$specie->save();
-						echo $i . "boom \n";
-					} else {
-						echo $i . "pas boom \n";
-					}
-				}
-				if ($endpoint == "https://swapi.dev/api/species/") {
-
 					$find_starship = Starship::where('name', $res['name'])->first();
 					if (!$find_starship) {
 						$starship = new Starship();
@@ -190,6 +167,29 @@ class ScrapeData extends Command
 						$starship->created_at = $res['created'];
 						$starship->updated_at = $res['edited'];
 						$starship->save();
+						echo $i . "boom \n";
+					} else {
+						echo $i . "pas boom \n";
+					}
+				}
+				if ($endpoint == "https://swapi.dev/api/species/") {
+
+					$find_specie = Specie::where('name', $res['name'])->first();
+					if (!$find_specie) {
+						$specie = new Specie();
+						$specie->name = $res['name'];
+						$specie->classification = $res['classification'];
+						$specie->designation = $res['designation'];
+						$specie->average_height = $res['average_height'];
+						$specie->skin_colors = $res['skin_colors'];
+						$specie->hair_colors = $res['hair_colors'];
+						$specie->eye_colors = $res['eye_colors'];
+						$specie->average_lifespan = $res['average_lifespan'];
+						$specie->homeworld = $res['homeworld'];
+						$specie->language = $res['language'];
+						$specie->created_at = $res['created'];
+						$specie->updated_at = $res['edited'];
+						$specie->save();
 						echo $i . "boom \n";
 					} else {
 						echo $i . "pas boom \n";
