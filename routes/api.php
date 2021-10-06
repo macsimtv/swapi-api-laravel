@@ -27,4 +27,10 @@ Route::group([
 	Route::post('/logout', [AuthController::class, 'logout']);
 	Route::post('/refresh', [AuthController::class, 'refresh']);
 	Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
+	Route::get('planet/{planet_id}', 'PlanetController@index');
+	Route::get('people/{people_id}', 'PeopleController@index');
+	Route::get('film/{film_id}', 'FilmController@index');
+	Route::get('startship/{startship_id}', 'StartshipController@index');
+	Route::get('vehicule/{vehicule_id}', 'VehiculeController@index');
 });
