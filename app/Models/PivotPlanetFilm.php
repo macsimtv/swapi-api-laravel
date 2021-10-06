@@ -9,6 +9,12 @@ class PivotPlanetFilm extends Model {
 
 	use HasFactory;
 
-	public function getFilms() { }
+	public function planet() {
+		$this->belongsTo(Planet::class);
+	}
+
+	public function film() {
+		$this->belongsTo(Film::class);
+	}
 
 }
