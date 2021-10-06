@@ -27,4 +27,9 @@ class Vehicle extends Model
 	{
 		return $this->hasMany(PivotPeopleVehicle::class);
 	}
+
+	public function films()
+	{
+		return $this->hasMany(PivotFilmVehicle::class);
+	}
 }

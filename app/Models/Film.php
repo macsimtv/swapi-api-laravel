@@ -37,4 +37,9 @@ class Film extends Model
 	{
 		return $this->hasMany(PivotFilmStarship::class);
 	}
+
+    public function vehicle()
+	{
+		return $this->hasMany(PivotFilmVehicle::class);
+	}
 }
