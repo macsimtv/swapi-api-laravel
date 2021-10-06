@@ -29,21 +29,16 @@ class People extends Model
 		"url"
 	];
 
+	protected $table = "peoples";
+
+	//films
 	public function films()
-	{
-		return $this->belongsToMany(Film::class);
-	}
-	public function people_films()
 	{
 		return $this->hasMany(PivotPeopleFilm::class);
 	}
 
+	//vehicles
 	public function vehicles()
-	{
-		return $this->belongsToMany(Vehicle::class);
-	}
-
-	public function people_vehicles()
 	{
 		return $this->hasMany(PivotPeopleVehicle::class);
 	}

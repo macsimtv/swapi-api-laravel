@@ -9,11 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class PivotPeopleFilm extends Model
 {
-    use HasFactory;
-    public function people(){
-        $this->belongsTo(People::class);
-    }
-    public function film(){
-        $this->belongsTo(Film::class);
-    }
+	protected $table = "pivot_people_films";
+
+	use HasFactory;
+	public function people()
+	{
+		return $this->belongsTo(People::class);
+	}
+	public function film()
+	{
+		return $this->belongsTo(Film::class);
+	}
 }
