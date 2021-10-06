@@ -13,7 +13,7 @@ class PeoplesMigration extends Migration
      */
     public function up()
     {
-        Schema::create('peoples', function(Blueprint $table) {
+        Schema::create('peoples', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->integer('height');
