@@ -14,7 +14,6 @@ class CreatePivotFilmStarshipsTable extends Migration
 	public function up()
 	{
 		Schema::create('pivot_film_starships', function (Blueprint $table) {
-			$table->id();
 			$table->timestamps();
 
 			$table->unsignedBigInteger('film_id');
