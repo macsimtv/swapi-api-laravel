@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+<<<<<<< HEAD
 
+=======
+use Illuminate\Http\JsonResponse;
+>>>>>>> b38582115a35bf7d090f895f053c587c359573fc
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -24,11 +28,17 @@ class AuthController extends Controller
     /**
      * Get a JWT via given credentials.
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
+<<<<<<< HEAD
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
+=======
+    public function login(Request $request): JsonResponse {
+    	$validator = Validator::make($request->all(), [
+>>>>>>> b38582115a35bf7d090f895f053c587c359573fc
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
@@ -47,10 +57,15 @@ class AuthController extends Controller
     /**
      * Register a User.
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
+<<<<<<< HEAD
     public function register(Request $request)
     {
+=======
+    public function register(Request $request): JsonResponse {
+>>>>>>> b38582115a35bf7d090f895f053c587c359573fc
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
@@ -78,8 +93,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+<<<<<<< HEAD
     public function logout()
     {
+=======
+    public function logout(): JsonResponse {
+>>>>>>> b38582115a35bf7d090f895f053c587c359573fc
         auth()->logout();
 
         return response()->json(['message' => 'User successfully signed out']);
@@ -90,8 +109,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+<<<<<<< HEAD
     public function refresh()
     {
+=======
+    public function refresh(): JsonResponse {
+>>>>>>> b38582115a35bf7d090f895f053c587c359573fc
         return $this->createNewToken(auth()->refresh());
     }
 
@@ -100,8 +123,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+<<<<<<< HEAD
     public function userProfile()
     {
+=======
+    public function userProfile(): JsonResponse {
+>>>>>>> b38582115a35bf7d090f895f053c587c359573fc
         return response()->json(auth()->user());
     }
 
@@ -112,8 +139,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+<<<<<<< HEAD
     protected function createNewToken($token)
     {
+=======
+    protected function createNewToken($token): JsonResponse {
+>>>>>>> b38582115a35bf7d090f895f053c587c359573fc
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
@@ -121,4 +152,8 @@ class AuthController extends Controller
             'user' => auth()->user()
         ]);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b38582115a35bf7d090f895f053c587c359573fc
 }
