@@ -30,7 +30,7 @@ class CreateStarshipsTable extends Migration
             $table->string('starship_class');
             $table->string('pilots');
             $table->string('films');
-            $table->timestamp();
+            $table->timestamps();
             $table->string('url');
         });
     }

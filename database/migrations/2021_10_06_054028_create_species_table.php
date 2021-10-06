@@ -25,7 +25,7 @@ class CreateSpeciesTable extends Migration
             $table->string('average_lifespan');
             $table->string('homeworld');
             $table->string('language');
-            $table->timestamp();
+            $table->timestamps();
             $table->string('url');
         });
     }

@@ -14,9 +14,9 @@ class CreatePivotFilmVehiclesTable extends Migration
     public function up()
     {
         Schema::create('pivot_film_vehicles', function (Blueprint $table) {
-            $table->id();
             $table->timestamps();
-
+            $table->unsignedBigInteger('film_id');
+            $table->unsignedBigInteger('vehicle_id');
             $table->foreign('film_id')->references('id')->on('films')
 				->onDelete('cascade')
 				->onUpdate('cascade');
