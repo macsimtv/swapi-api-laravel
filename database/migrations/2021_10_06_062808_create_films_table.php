@@ -21,6 +21,7 @@ class CreateFilmsTable extends Migration
 			$table->string('director');
 			$table->string('producer');
 			$table->string('release_date');
+			$table->timestamps();
 			$table->string('url')->nullable();
 		});
 	}

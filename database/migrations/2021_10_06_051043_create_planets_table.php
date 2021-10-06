@@ -6,16 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePlanetsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('planets', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('planets', function (Blueprint $table) {
+			$table->id();
 			$table->string('name')->unique();
 			$table->string('rotation_period');
 			$table->string('orbital_period');
@@ -25,17 +24,18 @@ class CreatePlanetsTable extends Migration
 			$table->string('gravity');
 			$table->string('surface_water');
 			$table->string('population');
+			$table->timestamps();
 			$table->string('url')->nullable();
-        });
-    }
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('planets');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('planets');
+	}
 }
