@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Film;
 use App\Models\People;
 use App\Models\Planet;
+use App\Models\Vehicle;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Console\Command;
 
@@ -83,6 +84,27 @@ class ScrapeData extends Command
 					}
 				}
 				if ($endpoint == "https://swapi.dev/api/vehicles/") {
+					$find = Vehicle::where('name', $res['name'])->first();
+					if (!$find) {
+						$vehicle = new Vehicle();
+						$vehicle->name = $res['name'];
+						$vehicle->model = $res['model'];
+						$vehicle->manufacturer = $res['manufacturer'];
+						$vehicle->cost_in_credits = $res['cost_in_credits'];
+						$vehicle->length = $res['length'];
+						$vehicle->max_atmosphering_speed = $res['max_atmosphering_speed'];
+						$vehicle->crew = $res['crew'];
+						$vehicle->passengers = $res['passengers'];
+						$vehicle->cargo_capacity = $res['cargo_capacity'];
+						$vehicle->consumables = $res['consumables'];
+						$vehicle->vehicle_class = $res['vehicle_class'];
+						$vehicle->created_at = $res['created'];
+						$vehicle->updated_at = $res['edited'];
+						$vehicle->save();
+						echo $i . "boom \n";
+					} else {
+						echo $i . "pas boom \n";
+					}
 				}
 				if ($endpoint == "https://swapi.dev/api/people/") {
 					$find_people = People::where('name', $res['name'])->first();
