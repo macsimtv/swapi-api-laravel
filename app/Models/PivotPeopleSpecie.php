@@ -2,22 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\People;
-use App\Models\Specie;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PivotPeopleSpecie extends Model
 {
 	use HasFactory;
 
-	public function people()
-	{
+	public function people(): BelongsTo {
 		return $this->belongsTo(People::class);
 	}
 
-	public function specie()
-	{
-		return $this->belongsTo(Specie::class);
+	public function specie(): BelongsTo {
+		return $this->belongsTo(specie::class);
 	}
 }
