@@ -15,9 +15,9 @@ class CreateStarshipsTable extends Migration
     {
         Schema::create('starships', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('model');
-            $table->integer('manufacturer');
+            $table->string('name')->unique();
+            $table->string('model');
+            $table->string('manufacturer');
             $table->string('cost_in_credits');
             $table->string('length');
             $table->string('max_atmosphering_speed');
@@ -31,7 +31,7 @@ class CreateStarshipsTable extends Migration
             $table->string('pilots');
             $table->string('films');
             $table->timestamps();
-            $table->string('url');
+            $table->string('url')->nullable();
         });
     }
 

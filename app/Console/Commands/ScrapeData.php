@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Planet;
+use App\Models\Starship;
+use App\Models\Specie;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Console\Command;
 
@@ -87,8 +89,53 @@ class ScrapeData extends Command
 				if ($endpoint == "https://swapi.dev/api/films/") {
 				}
 				if ($endpoint == "https://swapi.dev/api/starships/") {
+
+					$find_specie = Specie::where('name', $res['name'])->first();
+					if (!$find_specie) {
+						$specie = new Specie();
+						$specie->name = $res['name'];
+						$specie->classification = $res['classification'];
+						$specie->designation = $res['designation'];
+						$specie->average_height = $res['average_height'];
+						$specie->skin_colors = $res['skin_colors'];
+						$specie->hair_colors = $res['hair_colors'];
+						$specie->eye_colors = $res['eye_colors'];
+						$specie->average_lifespan = $res['average_lifespan'];
+						$specie->homeworld = $res['homeworld'];
+						$specie->language = $res['language'];
+						$specie->created_at = $res['created'];
+						$specie->updated_at = $res['edited'];
+						$specie->save();
+						echo $i . "boom \n";
+					} else {
+						echo $i . "pas boom \n";
+					}
 				}
 				if ($endpoint == "https://swapi.dev/api/species/") {
+
+					$find_starship = Starship::where('name', $res['name'])->first();
+					if (!$find_starship) {
+						$starship = new Starship();
+						$starship->name = $res['name'];
+						$starship->model = $res['model'];
+						$starship->manufacturer = $res['manufacturer'];
+						$starship->cost_in_credits = $res['cost_in_credits'];
+						$starship->length = $res['length'];
+						$starship->max_atmosphering_speed = $res['max_atmosphering_speed'];
+						$starship->crew = $res['crew'];
+						$starship->passengers = $res['passengers'];
+						$starship->cargo_capacity = $res['cargo_capacity'];
+						$starship->consumables = $res['consumables'];
+						$starship->hyperdrive_rating = $res['hyperdrive_rating'];
+						$starship->MGLT = $res['MGLT'];
+						$starship->starship_class = $res['starship_class'];
+						$starship->created_at = $res['created'];
+						$starship->updated_at = $res['edited'];
+						$starship->save();
+						echo $i . "boom \n";
+					} else {
+						echo $i . "pas boom \n";
+					}
 				}
 			}
 		}

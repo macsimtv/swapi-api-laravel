@@ -15,9 +15,9 @@ class CreateSpeciesTable extends Migration
     {
         Schema::create('species', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('classification');
-            $table->integer('designation');
+            $table->string('name')->unique();
+            $table->string('classification');
+            $table->string('designation');
             $table->string('average_height');
             $table->string('skin_colors');
             $table->string('hair_colors');
@@ -26,7 +26,7 @@ class CreateSpeciesTable extends Migration
             $table->string('homeworld');
             $table->string('language');
             $table->timestamps();
-            $table->string('url');
+            $table->string('url')->nullable();
         });
     }
 
