@@ -18,8 +18,6 @@ class ForeignKeys extends Migration
 			$table->foreign('people_id')->references('id')->on('peoples')
 				->onDelete('restrict')
 				->onUpdate('restrict');
-		});
-		Schema::table('pivot_people_films', function (Blueprint $table) {
 			$table->foreign('film_id')->references('id')->on('films')
 				->onDelete('restrict')
 				->onUpdate('restrict');
@@ -36,8 +34,6 @@ class ForeignKeys extends Migration
 	{
 		Schema::table('pivot_people_films', function (Blueprint $table) {
 			$table->dropForeign('pivot_people_films_people_id_foreign');
-		});
-		Schema::table('pivot_people_films', function (Blueprint $table) {
 			$table->dropForeign('pivot_people_films_film_id_foreign');
 		});
 
