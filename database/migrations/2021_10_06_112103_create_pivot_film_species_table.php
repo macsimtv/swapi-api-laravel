@@ -14,9 +14,9 @@ class CreatePivotFilmSpeciesTable extends Migration
     public function up()
     {
         Schema::create('pivot_film_species', function (Blueprint $table) {
-            $table->id();
             $table->timestamps();
-
+            $table->unsignedBigInteger('film_id');
+            $table->unsignedBigInteger('specie_id');
 			$table->foreign('film_id')->references('id')->on('films')
 				->onDelete('cascade')
 				->onUpdate('cascade');
