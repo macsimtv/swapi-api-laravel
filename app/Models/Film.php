@@ -32,4 +32,9 @@ class Film extends Model
 	{
 		return $this->hasMany(PivotPeopleFilm::class);
 	}
+
+    public function starchips()
+	{
+		return $this->hasMany(PivotFilmStarship::class);
+	}
 }
