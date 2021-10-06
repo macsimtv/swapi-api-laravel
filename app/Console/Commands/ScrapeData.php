@@ -5,12 +5,9 @@ namespace App\Console\Commands;
 use App\Models\Film;
 use App\Models\People;
 use App\Models\Planet;
-<<<<<<< HEAD
 use App\Models\Starship;
 use App\Models\Specie;
-=======
 use App\Models\Vehicle;
->>>>>>> a0f9aede3bcbbbde043e01595a2bb9576787669d
 use Illuminate\Support\Facades\Http;
 use Illuminate\Console\Command;
 
