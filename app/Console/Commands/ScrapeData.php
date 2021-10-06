@@ -5,8 +5,8 @@ namespace App\Console\Commands;
 use App\Models\Film;
 use App\Models\People;
 use App\Models\Planet;
-use App\Models\Starship;
 use App\Models\Specie;
+use App\Models\Starships;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Console\Command;
@@ -148,9 +148,9 @@ class ScrapeData extends Command
 				}
 				if ($endpoint == "https://swapi.dev/api/starships/") {
 
-					$find_starship = Starship::where('name', $res['name'])->first();
+					$find_starship = Starships::where('name', $res['name'])->first();
 					if (!$find_starship) {
-						$starship = new Starship();
+						$starship = new Starships();
 						$starship->name = $res['name'];
 						$starship->model = $res['model'];
 						$starship->manufacturer = $res['manufacturer'];
