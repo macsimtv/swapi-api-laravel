@@ -6,7 +6,7 @@ use App\Models\Film;
 use App\Models\People;
 use App\Models\Planet;
 use App\Models\Specie;
-use App\Models\Starships;
+use App\Models\Starship;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Console\Command;
@@ -148,9 +148,9 @@ class ScrapeData extends Command
 				}
 				if ($endpoint == "https://swapi.dev/api/starships/") {
 
-					$find_starship = Starships::where('name', $res['name'])->first();
+					$find_starship = Starship::where('name', $res['name'])->first();
 					if (!$find_starship) {
-						$starship = new Starships();
+						$starship = new Starship();
 						$starship->name = $res['name'];
 						$starship->model = $res['model'];
 						$starship->manufacturer = $res['manufacturer'];
@@ -158,7 +158,6 @@ class ScrapeData extends Command
 						$starship->length = $res['length'];
 						$starship->max_atmosphering_speed = $res['max_atmosphering_speed'];
 						$starship->crew = $res['crew'];
-						$starship->passengers = $res['passengers'];
 						$starship->cargo_capacity = $res['cargo_capacity'];
 						$starship->consumables = $res['consumables'];
 						$starship->hyperdrive_rating = $res['hyperdrive_rating'];
@@ -185,7 +184,6 @@ class ScrapeData extends Command
 						$specie->hair_colors = $res['hair_colors'];
 						$specie->eye_colors = $res['eye_colors'];
 						$specie->average_lifespan = $res['average_lifespan'];
-						$specie->homeworld = $res['homeworld'];
 						$specie->language = $res['language'];
 						$specie->created_at = $res['created'];
 						$specie->updated_at = $res['edited'];

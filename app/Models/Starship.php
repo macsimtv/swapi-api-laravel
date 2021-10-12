@@ -7,7 +7,7 @@ use App\Models\PivotPeopleStarship;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Starships extends Model
+class Starship extends Model
 {
 	use HasFactory;
 
