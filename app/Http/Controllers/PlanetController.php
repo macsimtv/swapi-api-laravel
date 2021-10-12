@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\PivotPeoplePlanet;
 use App\Models\PivotPlanetFilm;
 use App\Models\Planet;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PlanetController extends Controller
 {
-	public function index($planet_id)
-	{
+	public function index($planet_id): JsonResponse {
 		$planet = Planet::find($planet_id);
 
 		// Peoples
@@ -22,7 +22,7 @@ class PlanetController extends Controller
 		$planet['residents'] = $peopleArray;
 
 		// Films
-		$films = PivotPlanetFilm::where('planet_id', $planet->id)->get();
+		$films = PivotPlanetFilm::where('planet_id', $planet_id)->get();
 		$filmsArray = [];
 		foreach ($films as $film) {
 			$filmsArray[] = route('film', $film->film_id);
