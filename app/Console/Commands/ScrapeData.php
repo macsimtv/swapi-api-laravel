@@ -68,6 +68,7 @@ class ScrapeData extends Command
 					$find_planet = Planet::where('name', $res['name'])->first();
 					if (!$find_planet) {
 						$planet = new Planet();
+						$planet->id = ($i - 1);
 						$planet->name = $res['name'];
 						$planet->rotation_period = $res['rotation_period'];
 						$planet->orbital_period = $res['orbital_period'];
@@ -89,6 +90,7 @@ class ScrapeData extends Command
 					$find = Vehicle::where('name', $res['name'])->first();
 					if (!$find) {
 						$vehicle = new Vehicle();
+						$vehicle->id = ($i - 1);
 						$vehicle->name = $res['name'];
 						$vehicle->model = $res['model'];
 						$vehicle->manufacturer = $res['manufacturer'];
@@ -112,6 +114,7 @@ class ScrapeData extends Command
 					$find_people = People::where('name', $res['name'])->first();
 					if (!$find_people) {
 						$people = new People();
+						$people->id = ($i - 1);
 						$people->name = $res['name'];
 						$people->height = $res['height'];
 						$people->mass = $res['mass'];
@@ -132,6 +135,7 @@ class ScrapeData extends Command
 					$find_film = Film::where('title', $res['title'])->first();
 					if (!$find_film) {
 						$film = new Film();
+						$film->id = ($i - 1);
 						$film->title = $res['title'];
 						$film->episode_id = $res['episode_id'];
 						$film->opening_crawl = $res['opening_crawl'];
@@ -151,6 +155,7 @@ class ScrapeData extends Command
 					$find_starship = Starship::where('name', $res['name'])->first();
 					if (!$find_starship) {
 						$starship = new Starship();
+						$starship->id = ($i - 1);
 						$starship->name = $res['name'];
 						$starship->model = $res['model'];
 						$starship->manufacturer = $res['manufacturer'];
@@ -176,6 +181,7 @@ class ScrapeData extends Command
 					$find_specie = Specie::where('name', $res['name'])->first();
 					if (!$find_specie) {
 						$specie = new Specie();
+						$specie->id = ($i - 1);
 						$specie->name = $res['name'];
 						$specie->classification = $res['classification'];
 						$specie->designation = $res['designation'];
