@@ -10,6 +10,7 @@ class PivotPeopleSpecie extends Model
 {
 	use HasFactory;
 
+	protected $table = "pivot_people_species";
 	public function people(): BelongsTo {
 		return $this->belongsTo(People::class);
 	}

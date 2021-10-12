@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PivotFilmVehicle extends Model
 {
     use HasFactory;
+	protected $table = "pivot_film_vehicles";
     public function vehicle()
 	{
 		return $this->belongsTo(Vehicle::class);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PivotFilmSpecie extends Model {
 
 	use HasFactory;
-
+	protected $table = "pivot_film_species";
 	public function film(): BelongsTo {
 		return $this->belongsTo(Film::class);
 	}
