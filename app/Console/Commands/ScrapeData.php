@@ -10,6 +10,7 @@ use App\Models\Vehicle;
 use App\Models\Starship;
 use App\Models\PivotPeopleStarship;
 use App\Models\PivotPeopleSpecie;
+use App\Models\PivotPeopleFilm;
 use App\Models\PivotFilmStarship;
 use App\Models\PivotFilmSpecie;
 use App\Models\PivotPeoplePlanet;
@@ -240,6 +241,8 @@ class ScrapeData extends Command
 					}
 				}
 			}
+
+
 			if ($endpoint == "https://swapi.dev/api/vehicles/") {
 				$vehicles = Vehicle::all();
 
@@ -262,12 +265,25 @@ class ScrapeData extends Command
 					}
 				}
 			}
-			if ($endpoint == "https://swapi.dev/api/people/") {
-			}
+
 			if ($endpoint == "https://swapi.dev/api/films/") {
+				$films = Specie::all();
+
+				foreach ($films as $film) {
+					$res = Http::get($endpoint . strval($film->id));
+					foreach ($res['characters'] as $filmUrl) {
+						$pivotPeopleFilm = new pivotPeopleFilm();
+						$pivotPeopleFilm->film_id = $film->id;
+						$pivotPeopleFilm->people_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
+						echo 'badaboom ' . $pivotPeopleFilm->people_id;
+						$pivotPeopleFilm->save();
+					}
+				}
 			}
+
+
 			if ($endpoint == "https://swapi.dev/api/starships/") {
-				$starships = starship::all();
+				$starships = Starship::all();
 
 				foreach ($starships as $starship) {
 					$res = Http::get($endpoint . strval($starship->id));
@@ -289,7 +305,7 @@ class ScrapeData extends Command
 				}
 			}
 			if ($endpoint == "https://swapi.dev/api/species/") {
-				$species = specie::all();
+				$species = Specie::all();
 
 				foreach ($species as $specie) {
 					$res = Http::get($endpoint . strval($specie->id));
