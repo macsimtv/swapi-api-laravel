@@ -12,7 +12,8 @@ class SpecieController extends Controller
 
 	public function index($specie_id)
 	{
-		$specie = Specie::find($specie_id)->first();
+		$specie = Specie::find($specie_id);
+		$specie['url'] = route('specie', $specie_id);
 
 		// Planet
 		$planet = PivotPeoplePlanet::where('people_id', $specie_id)->first();
@@ -33,8 +34,6 @@ class SpecieController extends Controller
 			$filmsArray[] = route('film', $film->film_id);
 		}
 		$specie['films'] = $filmsArray;
-
-		$specie['url'] = route('specie', $specie_id);
 
 		return response()->json($specie);
 	}

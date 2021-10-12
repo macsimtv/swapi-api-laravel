@@ -16,6 +16,7 @@ class PeopleController extends Controller
 	public function index($people_id)
 	{
 		$people = People::find($people_id);
+		$people['url'] = route('people', $people_id);
 
 		// Planet
 		$planet = PivotPeoplePlanet::where('people_id', $people_id)->first();
@@ -52,8 +53,6 @@ class PeopleController extends Controller
 			$starshipsArray[] = route('starship', $starship->starship_id);
 		}
 		$people['starships'] = $starshipsArray;
-
-		$people['url'] = route('people', $people_id);
 
 		return response()->json($people);
 	}

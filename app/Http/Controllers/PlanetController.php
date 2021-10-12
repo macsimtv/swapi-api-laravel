@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 
 class PlanetController extends Controller
 {
-	public function index($planet_id): JsonResponse {
+	public function index($planet_id)
+	{
 		$planet = Planet::find($planet_id);
+		$planet['url'] = route('planet', $planet_id);
 
 		// Peoples
 		$peoples = PivotPeoplePlanet::where('planet_id', $planet_id)->get();
@@ -28,8 +30,6 @@ class PlanetController extends Controller
 			$filmsArray[] = route('film', $film->film_id);
 		}
 		$planet['films'] = $filmsArray;
-
-		$planet['url'] = route('planet', $planet_id);
 
 		return response()->json($planet);
 	}

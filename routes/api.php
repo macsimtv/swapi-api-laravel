@@ -38,6 +38,6 @@ Route::group([
 	Route::get('people/{people_id}', [PeopleController::class, 'index'])->name('people');
 	Route::get('film/{film_id}', [FilmController::class, 'index'])->name('film');
 	Route::get('startship/{startship_id}', [StarshipController::class, 'index'])->name('starship');
-	Route::get('vehicule/{vehicle_id}', [VehiculeController::class, 'index'])->name('vehicle');
+	Route::get('vehicle/{vehicle_id}', [VehiculeController::class, 'index'])->name('vehicle');
 	Route::get('/specie/{specie_id}', [SpecieController::class, 'index'])->name('specie');
 });
