@@ -25,7 +25,7 @@ class PlanetController extends Controller
 		$films = PivotPlanetFilm::where('planet_id', $planet->id)->get();
 		$filmsArray = [];
 		foreach ($films as $film) {
-			$filmsArray[] = route('planet', $film->film_id);
+			$filmsArray[] = route('film', $film->film_id);
 		}
 		$planet['films'] = $filmsArray;
 
