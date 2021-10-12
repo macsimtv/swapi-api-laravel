@@ -15,7 +15,7 @@ class PlanetController extends Controller
 		foreach ($planet->films as $film) {
 			$array[] = $film->film;
 		}
-		$planet['film'] = $array;
+		$planet['films'] = $array;
 
 		return $planet;
 	}
