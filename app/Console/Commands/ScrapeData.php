@@ -9,7 +9,9 @@ use App\Models\Specie;
 use App\Models\Vehicle;
 use App\Models\Starship;
 use App\Models\PivotPeopleStarship;
+use App\Models\PivotPeopleSpecie;
 use App\Models\PivotFilmStarship;
+use App\Models\PivotFilmSpecie;
 use App\Models\PivotPeoplePlanet;
 use App\Models\PivotFilmVehicle;
 use App\Models\PivotPeopleVehicle;
@@ -287,6 +289,26 @@ class ScrapeData extends Command
 				}
 			}
 			if ($endpoint == "https://swapi.dev/api/species/") {
+				$species = specie::all();
+
+				foreach ($species as $specie) {
+					$res = Http::get($endpoint . strval($specie->id));
+					foreach ($res['people'] as $specieUrl) {
+						$pivotPeopleSpecie = new pivotPeopleSpecie();
+						$pivotPeopleSpecie->specie_id = $specie->id;
+						$pivotPeopleSpecie->people_id = intval(preg_replace("/[^0-9]/", "", $specieUrl));
+						echo 'badaboom ' . $pivotPeopleSpecie->people_id;
+						$pivotPeopleSpecie->save();
+					}
+
+					foreach ($res['films'] as $filmUrl) {
+						$pivotFilmSpecie = new pivotFilmSpecie();
+						$pivotFilmSpecie->specie_id = $specie->id;
+						$pivotFilmSpecie->film_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
+						echo 'badaboom ' . $pivotFilmSpecie->film_id;
+						$pivotFilmSpecie->save();
+					}
+				}
 			}
 		}
 
