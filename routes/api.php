@@ -33,9 +33,9 @@ Route::group([
 	Route::post('/refresh', [AuthController::class, 'refresh']);
 	Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
-	Route::get('planet/{planet_id}', [PlanetController::class, 'index']);
-	Route::get('people/{people_id}', [PeopleController::class, 'index']);
-	Route::get('film/{film_id}', [FilmController::class, 'index']);
-	Route::get('startship/{startship_id}', [StarshipController::class, 'index']);
-	Route::get('vehicule/{vehicule_id}', [VehiculeController::class, 'index']);
+	Route::get('planet/{planet_id}', [PlanetController::class, 'index'])->name('planet');
+	Route::get('people/{people_id}', [PeopleController::class, 'index'])->name('people');
+	Route::get('film/{film_id}', [FilmController::class, 'index'])->name('film');
+	Route::get('startship/{startship_id}', [StarshipController::class, 'index'])->name('starship');
+	Route::get('vehicule/{vehicle_id}', [VehiculeController::class, 'index'])->name('vehicle');
 });
