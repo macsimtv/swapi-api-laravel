@@ -212,6 +212,7 @@ class ScrapeData extends Command
 			}
 		}*/
 		PivotPeoplePlanet::truncate();
+		PivotPeopleSpecie::truncate();
 		PivotPlanetFilm::truncate();
 		PivotPeopleVehicle::truncate();
 		PivotFilmVehicle::truncate();
