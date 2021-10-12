@@ -13,8 +13,10 @@ class SpecieController extends Controller
 	public function index($id) {
 		$specie = Specie::find($id)->first();
 
-		if($specie != null) {
-			return response()->json($specie);
+		if($specie === null) {
+			return response()->json([
+				"detail" => "Not found"
+			]);
 		}
 
 		//People
@@ -35,9 +37,7 @@ class SpecieController extends Controller
 
 		$specie['url'] = route('specie', $id);
 
-		return response()->json([
-			"detail" => "Not found"
-		]);
+		return response()->json($specie);
 	}
 
 }
