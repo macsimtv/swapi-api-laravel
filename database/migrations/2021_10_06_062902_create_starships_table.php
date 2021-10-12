@@ -22,7 +22,6 @@ class CreateStarshipsTable extends Migration
             $table->string('length');
             $table->string('max_atmosphering_speed');
             $table->string('crew');
-            $table->string('passengers');
             $table->string('cargo_capacity');
             $table->string('consumables');
             $table->string('hyperdrive_rating');
