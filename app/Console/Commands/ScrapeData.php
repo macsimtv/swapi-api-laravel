@@ -212,6 +212,7 @@ class ScrapeData extends Command
 			}
 		}*/
 		PivotPeoplePlanet::truncate();
+		PivotPeopleSpecie::truncate();
 		PivotPlanetFilm::truncate();
 		PivotPeopleVehicle::truncate();
 		PivotFilmVehicle::truncate();
@@ -219,6 +220,7 @@ class ScrapeData extends Command
 		PivotFilmStarship::truncate();
 		PivotFilmSpecie::truncate();
 		PivotPeopleFilm::truncate();
+		PivotPeopleSpecie::truncate();
 
 		foreach ($endpoints as $endpoint) {
 			if ($endpoint == "https://swapi.dev/api/planets/") {
