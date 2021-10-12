@@ -219,6 +219,7 @@ class ScrapeData extends Command
 		PivotFilmStarship::truncate();
 		PivotFilmSpecie::truncate();
 		PivotPeopleFilm::truncate();
+		PivotPeopleSpecie::truncate();
 
 		foreach ($endpoints as $endpoint) {
 			if ($endpoint == "https://swapi.dev/api/planets/") {
