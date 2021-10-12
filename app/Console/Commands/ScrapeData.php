@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use App\Models\Film;
 use App\Models\People;
 use App\Models\PivotPeoplePlanet;
+use App\Models\PivotFilmVehicle;
+use App\Models\PivotPeopleVehicle;
 use App\Models\PivotPlanetFilm;
 use App\Models\Planet;
 use App\Models\Specie;
@@ -206,6 +208,8 @@ class ScrapeData extends Command
 		}*/
 		PivotPeoplePlanet::truncate();
 		PivotPlanetFilm::truncate();
+		PivotPeopleVehicle::truncate();
+		PivotFilmVehicle::truncate();
 		foreach ($endpoints as $endpoint) {
 			if ($endpoint == "https://swapi.dev/api/planets/") {
 				$planets = Planet::all();
@@ -231,7 +235,26 @@ class ScrapeData extends Command
 				
 			}
 			if ($endpoint == "https://swapi.dev/api/vehicles/") {	
-				
+				$vehicles = Vehicle::all();
+
+				foreach($vehicles as $vehicle){
+					$res = Http::get($endpoint . strval($vehicle->id));
+					foreach ($res['pilots'] as $vehicleUrl) {
+						$pivotPeopleVehicle = new PivotPeopleVehicle();
+						$pivotPeopleVehicle->vehicle_id = $vehicle->id;
+						$pivotPeopleVehicle->people_id = intval(preg_replace("/[^0-9]/", "", $vehicleUrl));
+						echo 'badaboom ' . $pivotPeopleVehicle->people_id;
+						$pivotPeopleVehicle->save();
+					}
+
+					foreach ($res['films'] as $filmUrl) {
+						$pivotFilmVehicle = new PivotFilmVehicle();
+						$pivotFilmVehicle->vehicle_id = $vehicle->id;
+						$pivotFilmVehicle->film_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
+						echo 'badaboom ' . $pivotFilmVehicle->film_id;
+						$pivotFilmVehicle->save();
+					}
+				}
 			}
 			if ($endpoint == "https://swapi.dev/api/people/") {
 				
