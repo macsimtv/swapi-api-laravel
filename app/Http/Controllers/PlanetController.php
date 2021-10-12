@@ -9,7 +9,7 @@ class PlanetController extends Controller
 {
 	public function index($planet_id)
 	{
-		$planet = Planet::find($planet_id)->first();
+		$planet = Planet::find($planet_id);
 
 		$array = [];
 		foreach ($planet->films as $film) {
