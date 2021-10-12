@@ -217,6 +217,8 @@ class ScrapeData extends Command
 		PivotFilmVehicle::truncate();
 		PivotPeopleStarship::truncate();
 		PivotFilmStarship::truncate();
+		PivotFilmSpecie::truncate();
+		PivotPeopleFilm::truncate();
 
 		foreach ($endpoints as $endpoint) {
 			if ($endpoint == "https://swapi.dev/api/planets/") {
@@ -267,7 +269,7 @@ class ScrapeData extends Command
 			}
 
 			if ($endpoint == "https://swapi.dev/api/films/") {
-				$films = Specie::all();
+				$films = Film::all();
 
 				foreach ($films as $film) {
 					$res = Http::get($endpoint . strval($film->id));
@@ -280,7 +282,6 @@ class ScrapeData extends Command
 					}
 				}
 			}
-
 
 			if ($endpoint == "https://swapi.dev/api/starships/") {
 				$starships = Starship::all();
