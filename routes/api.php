@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\PlanetController;
+use App\Http\Controllers\SpecieController;
 use App\Models\People;
 use App\Models\Vehicle;
 
@@ -38,5 +39,5 @@ Route::group([
 	Route::get('film/{film_id}', [FilmController::class, 'index'])->name('film');
 	Route::get('startship/{startship_id}', [StarshipController::class, 'index'])->name('starship');
 	Route::get('vehicule/{vehicle_id}', [VehiculeController::class, 'index'])->name('vehicle');
-	Route::get('/species/{specie_id}', [SpecieController::class, 'index']);
+	Route::get('/specie/{specie_id}', [SpecieController::class, 'index'])->name('specie');
 });
