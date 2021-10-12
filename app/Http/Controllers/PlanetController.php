@@ -10,13 +10,11 @@ class PlanetController extends Controller
 	public function index($planet_id)
 	{
 		$planet = Planet::find($planet_id);
-
-		$array = [];
+		$planet->films;
 		foreach ($planet->films as $film) {
-			$array[] = $film->film;
+			$film->film;
 		}
-		$planet['films'] = $array;
-
-		return $planet;
+		// $planet['films'] = $array;
+		return response()->json($planet);
 	}
 }
