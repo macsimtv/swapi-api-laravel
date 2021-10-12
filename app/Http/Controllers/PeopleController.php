@@ -14,9 +14,15 @@ class PeopleController extends Controller
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function index($id): JsonResponse {
-		$people = People::findOrFail($id);
+		$people = People::find($id)->first();
 
-		return response()->json($people);
+		if($people != null) {
+			return response()->json($people);
+		}
+
+		return response()->json([
+			'detail' => 'Not found'
+		]);
 	}
 
 }
