@@ -4,12 +4,15 @@ namespace App\Console\Commands;
 
 use App\Models\Film;
 use App\Models\People;
+use App\Models\PivotPeoplePlanet;
+use App\Models\PivotPlanetFilm;
 use App\Models\Planet;
 use App\Models\Specie;
 use App\Models\Starship;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ScrapeData extends Command
 {
@@ -54,7 +57,7 @@ class ScrapeData extends Command
 			"https://swapi.dev/api/species/"
 		];
 
-		foreach ($endpoints as $endpoint) {
+		/*foreach ($endpoints as $endpoint) {
 			$i = 1;
 			while ($i < 90) {
 				$res = Http::get($endpoint . strval($i));
@@ -199,6 +202,50 @@ class ScrapeData extends Command
 						echo $i . "pas boom \n";
 					}
 				}
+			}
+		}*/
+		PivotPeoplePlanet::truncate();
+		PivotPlanetFilm::truncate();
+		foreach ($endpoints as $endpoint) {
+			if ($endpoint == "https://swapi.dev/api/planets/") {
+				$planets = Planet::all();
+
+				foreach($planets as $planet){
+					$res = Http::get($endpoint . strval($planet->id));
+					foreach ($res['residents'] as $peopleUrl) {
+						$pivotPlanetPeople = new PivotPeoplePlanet();
+						$pivotPlanetPeople->planet_id = $planet->id;
+						$pivotPlanetPeople->people_id = intval(preg_replace("/[^0-9]/", "", $peopleUrl));
+						echo 'badaboom ' . $pivotPlanetPeople->people_id;
+						$pivotPlanetPeople->save();
+					}
+
+					foreach ($res['films'] as $filmUrl) {
+						$pivotPlanetFilm = new PivotPlanetFilm();
+						$pivotPlanetFilm->planet_id = $planet->id;
+						$pivotPlanetFilm->film_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
+						echo 'badaboom ' . $pivotPlanetFilm->film_id;
+						$pivotPlanetFilm->save();
+					}
+				}
+				
+			}
+			if ($endpoint == "https://swapi.dev/api/vehicles/") {	
+				
+			}
+			if ($endpoint == "https://swapi.dev/api/people/") {
+				
+			}
+			if ($endpoint == "https://swapi.dev/api/films/") {
+				
+			}
+			if ($endpoint == "https://swapi.dev/api/starships/") {
+
+				
+			}
+			if ($endpoint == "https://swapi.dev/api/species/") {
+
+				
 			}
 		}
 

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PivotPlanetFilm extends Model
 {
 	use HasFactory;
-
+	protected $table = "pivot_planet_films";
 	public function planet()
 	{
 		return $this->belongsTo(Planet::class);
