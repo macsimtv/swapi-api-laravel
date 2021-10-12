@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\StarshipController;
 use App\Http\Controllers\VehiculeController;
 use Illuminate\Http\Request;
@@ -33,7 +34,7 @@ Route::group([
 	Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
 	Route::get('planet/{planet_id}', [PlanetController::class, 'index']);
-	Route::get('people/{people_id}', 'PeopleController@index');
+	Route::get('people/{people_id}', [PeopleController::class, 'index']);
 	Route::get('film/{film_id}', [FilmController::class, 'index']);
 	Route::get('startship/{startship_id}', [StarshipController::class, 'index']);
 	Route::get('vehicule/{vehicule_id}', [VehiculeController::class, 'index']);
