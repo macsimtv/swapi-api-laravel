@@ -4,14 +4,16 @@ namespace App\Console\Commands;
 
 use App\Models\Film;
 use App\Models\People;
+use App\Models\Planet;
+use App\Models\Specie;
+use App\Models\Vehicle;
+use App\Models\Starship;
+use App\Models\PivotPeopleStarship;
+use App\Models\PivotFilmStarship;
 use App\Models\PivotPeoplePlanet;
 use App\Models\PivotFilmVehicle;
 use App\Models\PivotPeopleVehicle;
 use App\Models\PivotPlanetFilm;
-use App\Models\Planet;
-use App\Models\Specie;
-use App\Models\Starship;
-use App\Models\Vehicle;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -210,11 +212,14 @@ class ScrapeData extends Command
 		PivotPlanetFilm::truncate();
 		PivotPeopleVehicle::truncate();
 		PivotFilmVehicle::truncate();
+		PivotPeopleStarship::truncate();
+		PivotFilmStarship::truncate();
+
 		foreach ($endpoints as $endpoint) {
 			if ($endpoint == "https://swapi.dev/api/planets/") {
 				$planets = Planet::all();
 
-				foreach($planets as $planet){
+				foreach ($planets as $planet) {
 					$res = Http::get($endpoint . strval($planet->id));
 					foreach ($res['residents'] as $peopleUrl) {
 						$pivotPlanetPeople = new PivotPeoplePlanet();
@@ -232,12 +237,11 @@ class ScrapeData extends Command
 						$pivotPlanetFilm->save();
 					}
 				}
-				
 			}
-			if ($endpoint == "https://swapi.dev/api/vehicles/") {	
+			if ($endpoint == "https://swapi.dev/api/vehicles/") {
 				$vehicles = Vehicle::all();
 
-				foreach($vehicles as $vehicle){
+				foreach ($vehicles as $vehicle) {
 					$res = Http::get($endpoint . strval($vehicle->id));
 					foreach ($res['pilots'] as $vehicleUrl) {
 						$pivotPeopleVehicle = new PivotPeopleVehicle();
@@ -257,18 +261,32 @@ class ScrapeData extends Command
 				}
 			}
 			if ($endpoint == "https://swapi.dev/api/people/") {
-				
 			}
 			if ($endpoint == "https://swapi.dev/api/films/") {
-				
 			}
 			if ($endpoint == "https://swapi.dev/api/starships/") {
+				$starships = starship::all();
 
-				
+				foreach ($starships as $starship) {
+					$res = Http::get($endpoint . strval($starship->id));
+					foreach ($res['pilots'] as $starshipUrl) {
+						$pivotPeopleStarship = new pivotPeopleStarship();
+						$pivotPeopleStarship->starship_id = $starship->id;
+						$pivotPeopleStarship->people_id = intval(preg_replace("/[^0-9]/", "", $starshipUrl));
+						echo 'badaboom ' . $pivotPeopleStarship->people_id;
+						$pivotPeopleStarship->save();
+					}
+
+					foreach ($res['films'] as $filmUrl) {
+						$pivotFilmStarship = new PivotFilmStarship();
+						$pivotFilmStarship->starship_id = $starship->id;
+						$pivotFilmStarship->film_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
+						echo 'badaboom ' . $pivotFilmStarship->film_id;
+						$pivotFilmStarship->save();
+					}
+				}
 			}
 			if ($endpoint == "https://swapi.dev/api/species/") {
-
-				
 			}
 		}
 
