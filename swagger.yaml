@@ -5,77 +5,60 @@ info:
   title: "swapi"
 host: "localhost"
 basePath: "/api"
-tags:
-- name: "species"
-  description: "Les espèces"
-- name: "films"
-  description: "Les films"
-- name: "planets"
-  description: "Les planètes"
-- name: "user"
-  description: "Operations about user"
 schemes:
-- "http"
+  - "http"
 
-components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
 
 paths:
-  /v1/species:
-    get:
-      tags:
-        - "species"
-      summary: "Retourne toute les espèces"
-      security:
-        - BearerAuth: []
-      produces:
-        - "application/json"
-      responses:
-        200:
-          description: "Renvoie la liste"
   /v1/species/{id}:
     get:
-      tags:
-      - "species"
-      summary: "Retourne une espèce avec son identifiant"
       security:
-        - BearerAuth: []
+        - Bearer: []
+      tags:
+        - "Species"
+      summary: "Retourne une espèce avec son identifiant"
       description: ""
-      operationId: "getSpecies"
+      operationId: "getSpecie"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "Identifiant de l'espèce"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "return specie's Id"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         "404":
           description: "Non trouvé"
-  /v1/people:
+
+  /v1/species/:
     get:
-      tags:
-        - "species"
-      summary: "Retourne tous les "
       security:
-        - BearerAuth: [ ]
+        - Bearer: []
+      tags:
+        - "Species"
+      summary: "Return all species"
+      description: ""
+      operationId: "getSpecies"
       produces:
         - "application/json"
       responses:
-        200:
-          description: "Renvoie la liste"
+        "404":
+          description: "Non trouvé"
+
   /v1/people/{id}:
     get:
-      tags:
-        - "people"
-      summary: "Retourne une personne avec son identifiant"
       security:
-        - BearerAuth: [ ]
+        - Bearer: []
+      tags:
+        - "People"
+      summary: "Retourne une personne avec son identifiant"
       description: ""
       operationId: "getPeople"
       produces:
@@ -83,20 +66,35 @@ paths:
       parameters:
         - name: "id"
           in: "path"
-          description: "Identifiant de la personne"
+          description: "people's Id"
           required: true
           type: "integer"
           format: "int64"
       responses:
         "404":
           description: "Non trouvé"
+  /v1/people/:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - "People"
+      summary: "Return all people"
+      description: ""
+      operationId: "getPeoples"
+      produces:
+        - "application/json"
+      responses:
+        "404":
+          description: "Non trouvé"
+
   /v1/vehicle/{id}:
     get:
-      tags:
-        - "vehicule"
-      summary: "Retourne le véhicule avec son identifiant"
       security:
-        - BearerAuth: [ ]
+        - Bearer: []
+      tags:
+        - "Vehicule"
+      summary: "Return Vehicles's Id"
       description: ""
       operationId: "getVehicule"
       produces:
@@ -104,31 +102,68 @@ paths:
       parameters:
         - name: "id"
           in: "path"
-          description: "Identifiant du véhicule"
+          description: "Vehicles's Id"
           required: true
           type: "integer"
           format: "int64"
       responses:
         "404":
           description: "Non trouvé"
+
+  /v1/vehicle/:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - "Vehicule"
+      summary: "Return Vehicles"
+      description: ""
+      operationId: "getVehicules"
+      produces:
+        - "application/json"
+      responses:
+        "404":
+          description: "Non trouvé"
+
   /v1/films/{id}:
     get:
-      tags:
-      - "films"
-      summary: "Retourne un film avec son identifiant"
       security:
-        - BearerAuth: [ ]
+        - Bearer: []
+      tags:
+        - "Films"
+      summary: "Return film's Id"
+      description: ""
+      operationId: "getFilm"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "film's Id"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Film"
+        "400":
+          description: "Invalid status value"
+
+  /v1/films/:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - "Films"
+      summary: "Return films"
       description: ""
       operationId: "getFilms"
       produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "Identifiant du film"
-        required: true
-        type: "integer"
-        format: "int64"
+        - "application/json"
       responses:
         "200":
           description: "successful operation"
@@ -140,22 +175,41 @@ paths:
           description: "Invalid status value"
   /v1/planets/{id}:
     get:
-      tags:
-      - "planets"
-      summary: "Retourne la planète avec son identifiant"
       security:
-        - BearerAuth: [ ]
+        - Bearer: []
+      tags:
+        - "Planets"
+      summary: "Return Planet's Id"
+      description: ""
+      operationId: "getPlanet"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Planet's Id"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "récupération réussie"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Planet"
+
+  /v1/planets/:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - "Planets"
+      summary: "Return Planets"
       description: ""
       operationId: "getPlanets"
       produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "identifiant de la planète"
-        required: true
-        type: "integer"
-        format: "int64"
+        - "application/json"
       responses:
         "200":
           description: "récupération réussie"
@@ -165,19 +219,19 @@ paths:
               $ref: "#/definitions/Planet"
   /v1/starship/{id}:
     get:
-      tags:
-        - "startships"
-      summary: "Retourne le vaisseau avec son identifiant"
       security:
-        - BearerAuth: [ ]
+        - Bearer: []
+      tags:
+        - "Startships"
+      summary: "Return Starships's Id"
       description: ""
-      operationId: "getStartships"
+      operationId: "getStartship"
       produces:
         - "application/json"
       parameters:
         - name: "id"
           in: "path"
-          description: "identifiant du vaisseau"
+          description: "Starships's Id"
           required: true
           type: "integer"
           format: "int64"
@@ -188,11 +242,30 @@ paths:
             type: "string"
             items:
               $ref: "#/definitions/Starship"
+
+  /v1/starship/:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - "Startships"
+      summary: "Return Starships"
+      description: ""
+      operationId: "getStartships"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful catch"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Starship"
   /auth/register:
     post:
       tags:
-        - "user"
-      summary: "Création d'utilisateur"
+        - "User"
+      summary: "Create User"
       produces:
         - "application/json"
       parameters:
@@ -203,29 +276,27 @@ paths:
             $ref: "#/definitions/User"
       responses:
         default:
-          description: "User créer"
+          description: "created user"
   /auth/login:
     post:
       tags:
-      - "user"
+        - "User"
       summary: "Logs user into the system"
-      security:
-        - BearerAuth: [ ]
       description: ""
       operationId: "loginUser"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "username"
-        in: "query"
-        description: "The user name for login"
-        required: true
-        type: "string"
-      - name: "password"
-        in: "query"
-        description: "The password for login in clear text"
-        required: true
-        type: "string"
+        - name: "username"
+          in: "query"
+          description: "The user name for login"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "query"
+          description: "The password for login in clear text"
+          required: true
+          type: "string"
       responses:
         "200":
           description: "successful operation"
@@ -233,6 +304,60 @@ paths:
             type: "string"
         "400":
           description: "Invalid username/password supplied"
+
+  /auth/logout:
+    post:
+      tags:
+        - "User"
+      summary: "disconnecting from an account voluntarily"
+      description: ""
+      operationId: "logoutUser"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful logout"
+          schema:
+            type: "string"
+        "400":
+          description: "Invalid username/password supplied"
+
+  /auth/refresh:
+    post:
+      tags:
+        - "User"
+      summary: "disconnecting from an account voluntarily"
+      description: ""
+      operationId: "refreshToken"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "new token"
+          schema:
+            type: "string"
+        "400":
+          description: "Bad request"
+
+  /auth/user-profile:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - "User"
+      summary: "access to user profile"
+      description: ""
+      operationId: "userProfile"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "new token"
+          schema:
+            type: "string"
+        "400":
+          description: "Bad request"
+
 definitions:
   Starship:
     type: "object"
@@ -266,11 +391,11 @@ definitions:
       pilots:
         type: array
         items:
-          $ref: '#/definitions/User'
+          $ref: "#/definitions/User"
       films:
         type: array
         items:
-          $ref: '#/definitions/Film'
+          $ref: "#/definitions/Film"
       created:
         type: "string"
         format: date-time
@@ -298,23 +423,23 @@ definitions:
       characters:
         type: array
         items:
-          $ref: '#/definitions/People'
+          $ref: "#/definitions/People"
       planets:
         type: array
         items:
-          $ref: '#/definitions/Planet'
+          $ref: "#/definitions/Planet"
       starships:
         type: array
         items:
-          $ref: '#/definitions/Starship'
+          $ref: "#/definitions/Starship"
       vehicles:
         type: array
         items:
-          $ref: '#/definitions/Vehicle'
+          $ref: "#/definitions/Vehicle"
       species:
         type: array
         items:
-          $ref: '#/definitions/Specie'
+          $ref: "#/definitions/Specie"
       created:
         type: "string"
         format: date-time
@@ -347,11 +472,11 @@ definitions:
       residents:
         type: array
         items:
-          $ref: '#/definitions/People'
+          $ref: "#/definitions/People"
       films:
         type: array
         items:
-          $ref: '#/definitions/Film'
+          $ref: "#/definitions/Film"
       created:
         type: "string"
         format: date-time
@@ -364,35 +489,35 @@ definitions:
     type: "object"
     properties:
       name:
-        type: 'string'
+        type: "string"
       model:
-        type: 'string'
+        type: "string"
       manufacturer:
-        type: 'string'
+        type: "string"
       cost_in_credits:
-        type: 'string'
+        type: "string"
       length:
-        type: 'string'
+        type: "string"
       max_atmosphering_speed:
-        type: 'string'
+        type: "string"
       crew:
-        type: 'string'
+        type: "string"
       passengers:
-        type: 'string'
+        type: "string"
       cargo_capacity:
-        type: 'string'
+        type: "string"
       consumables:
-        type: 'string'
+        type: "string"
       vehicle_class:
-        type: 'string'
+        type: "string"
       pilots:
         type: array
         items:
-          $ref: '#/definitions/People'
+          $ref: "#/definitions/People"
       films:
         type: array
         items:
-          $ref: '#/definitions/Film'
+          $ref: "#/definitions/Film"
       created:
         type: "string"
         format: date-time
@@ -425,19 +550,19 @@ definitions:
       films:
         type: array
         items:
-          $ref: '#/definitions/Film'
+          $ref: "#/definitions/Film"
       species:
         type: array
         items:
-          $ref: '#/definitions/Specie'
+          $ref: "#/definitions/Specie"
       vehicle:
         type: array
         items:
-          $ref: '#/definitions/Vehicle'
+          $ref: "#/definitions/Vehicle"
       starships:
         type: array
         items:
-          $ref: '#/definitions/Starship'
+          $ref: "#/definitions/Starship"
       created:
         type: "string"
         format: date-time
@@ -447,34 +572,34 @@ definitions:
       url:
         type: "string"
   Specie:
-    type: 'object'
+    type: "object"
     properties:
       name:
-        type: 'string'
+        type: "string"
       classification:
-        type: 'string'
+        type: "string"
       designation:
-        type: 'string'
+        type: "string"
       average_height:
-        type: 'string'
+        type: "string"
       skin_color:
-        type: 'string'
+        type: "string"
       hair_color:
-        type: 'string'
+        type: "string"
       eye_colors:
-        type: 'string'
+        type: "string"
       average_lifespan:
-        type: 'string'
+        type: "string"
       homeworld:
-        type: 'string'
+        type: "string"
       people:
         type: array
         items:
-          $ref: '#/definitions/People'
+          $ref: "#/definitions/People"
       films:
         type: array
         items:
-          $ref: '#/definitions/Film'
+          $ref: "#/definitions/Film"
       created:
         type: "string"
         format: date-time
