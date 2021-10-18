@@ -37,6 +37,26 @@ class VehiculeController extends Controller
 	public function show()
 	{
 		$vehicles = Vehicle::all();
+		foreach ($vehicles as $vehicle) {
+			$vehicle_id = $vehicle->id;
+			$vehicle['url'] = route('vehicle', $vehicle_id);
+
+			// Peoples
+			$peoples = PivotPeopleVehicle::where('vehicle_id', $vehicle_id)->get();
+			$peoplesArray = [];
+			foreach ($peoples as $people) {
+				$peoplesArray[] = route('people', $people->people_id);
+			}
+			$vehicle['pilots'] = $peoplesArray;
+
+			// Films
+			$films = PivotFilmVehicle::where('vehicle_id', $vehicle_id)->get();
+			$filmsArray = [];
+			foreach ($films as $film) {
+				$filmsArray[] = route('film', $film->film_id);
+			}
+			$vehicle['films'] = $filmsArray;
+		}
 		return response()->json($vehicles);
 	}
 }
