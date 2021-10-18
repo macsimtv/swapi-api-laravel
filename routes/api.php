@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\PlanetController;
 use App\Http\Controllers\SpecieController;
+use App\Http\Middleware\JwtMiddleware;
 use App\Models\People;
 use App\Models\Vehicle;
 
@@ -23,12 +24,18 @@ use App\Models\Vehicle;
 |
 */
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
 
 Route::group([
-	'middleware' => 'api',
 	'prefix' => 'auth'
+], function ($router) {
+	Route::post('/login', [AuthController::class, 'login']);
+	Route::post('/register', [AuthController::class, 'register']);
+});
+
+
+Route::group([
+	'middleware' => 'auth:api',
+	'prefix' => 'v1'
 
 ], function ($router) {
 	Route::post('/logout', [AuthController::class, 'logout']);
