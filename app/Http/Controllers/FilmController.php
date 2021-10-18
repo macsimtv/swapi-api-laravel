@@ -48,7 +48,11 @@ class FilmController extends Controller
 		}
 		$film['vehicles'] = $vehiclesArray;
 
+<<<<<<< HEAD
 		// Species
+=======
+		//Species
+>>>>>>> e5c2b9d7ac694636cd1a60ad5b754aa9f695f876
 		$species = PivotFilmSpecie::where('film_id', $film->id)->get();
 		$speciesArray = [];
 		foreach ($species as $specie) {
@@ -64,6 +68,50 @@ class FilmController extends Controller
 	public function show()
 	{
 		$films = Film::all();
+		foreach ($films as $film) {
+			$film_id = $film->id;
+			// Peoples
+			$peoples = PivotPeopleFilm::where('film_id', $film_id)->get();
+			$peopleArray = [];
+			foreach ($peoples as $people) {
+				$peopleArray[] = route('people', $people->people_id);
+			}
+			$film['characters'] = $peopleArray;
+
+			// Planets
+			$planets = PivotPlanetFilm::where('film_id', $film->id)->get();
+			$planetsArray = [];
+			foreach ($planets as $planet) {
+				$planetsArray[] = route('planet', $planet->planet_id);
+			}
+			$film['planets'] = $planetsArray;
+
+			// Starships
+			$starships = PivotFilmStarship::where('film_id', $film->id)->get();
+			$starshipsArray = [];
+			foreach ($starships as $starship) {
+				$starshipsArray[] = route('starship', $starship->starship_id);
+			}
+			$film['starships'] = $starshipsArray;
+
+			// Vehicles
+			$vehicles = PivotFilmVehicle::where('film_id', $film->id)->get();
+			$vehiclesArray = [];
+			foreach ($vehicles as $vehicle) {
+				$vehiclesArray[] = route('vehicle', $vehicle->vehicle_id);
+			}
+			$film['vehicles'] = $vehiclesArray;
+
+			//Species
+			$species = PivotFilmSpecie::where('film_id', $film->id)->get();
+			$speciesArray = [];
+			foreach ($species as $specie) {
+				$speciesArray[] = route('specie', $specie->specie_id);
+			}
+			$film['species'] = $speciesArray;
+		}
+
+		$film['url'] = route('film', $film_id);
 		return response()->json($films);
 	}
 }

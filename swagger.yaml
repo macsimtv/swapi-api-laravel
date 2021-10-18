@@ -18,11 +18,24 @@ schemes:
 - "http"
 
 components:
-  BearerAuth:
-    type: http
-    scheme: bearer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
 
 paths:
+  /v1/species:
+    get:
+      tags:
+        - "species"
+      summary: "Retourne toute les espèces"
+      security:
+        - BearerAuth: []
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Renvoie la liste"
   /v1/species/{id}:
     get:
       tags:
@@ -44,6 +57,18 @@ paths:
       responses:
         "404":
           description: "Non trouvé"
+  /v1/people:
+    get:
+      tags:
+        - "species"
+      summary: "Retourne tous les "
+      security:
+        - BearerAuth: [ ]
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Renvoie la liste"
   /v1/people/{id}:
     get:
       tags:
@@ -59,6 +84,27 @@ paths:
         - name: "id"
           in: "path"
           description: "Identifiant de la personne"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "404":
+          description: "Non trouvé"
+  /v1/vehicle/{id}:
+    get:
+      tags:
+        - "vehicule"
+      summary: "Retourne le véhicule avec son identifiant"
+      security:
+        - BearerAuth: [ ]
+      description: ""
+      operationId: "getVehicule"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Identifiant du véhicule"
           required: true
           type: "integer"
           format: "int64"
@@ -159,7 +205,7 @@ paths:
         default:
           description: "User créer"
   /auth/login:
-    get:
+    post:
       tags:
       - "user"
       summary: "Logs user into the system"
@@ -299,6 +345,47 @@ definitions:
       population:
         type: "string"
       residents:
+        type: array
+        items:
+          $ref: '#/definitions/People'
+      films:
+        type: array
+        items:
+          $ref: '#/definitions/Film'
+      created:
+        type: "string"
+        format: date-time
+      edited:
+        type: "string"
+        format: date-time
+      url:
+        type: "string"
+  Vehicle:
+    type: "object"
+    properties:
+      name:
+        type: 'string'
+      model:
+        type: 'string'
+      manufacturer:
+        type: 'string'
+      cost_in_credits:
+        type: 'string'
+      length:
+        type: 'string'
+      max_atmosphering_speed:
+        type: 'string'
+      crew:
+        type: 'string'
+      passengers:
+        type: 'string'
+      cargo_capacity:
+        type: 'string'
+      consumables:
+        type: 'string'
+      vehicle_class:
+        type: 'string'
+      pilots:
         type: array
         items:
           $ref: '#/definitions/People'

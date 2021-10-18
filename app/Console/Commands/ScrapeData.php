@@ -64,7 +64,7 @@ class ScrapeData extends Command
 			"https://swapi.dev/api/species/"
 		];
 
-		/*foreach ($endpoints as $endpoint) {
+		foreach ($endpoints as $endpoint) {
 			$i = 1;
 			while ($i < 90) {
 				$res = Http::get($endpoint . strval($i));
@@ -91,9 +91,9 @@ class ScrapeData extends Command
 						$planet->created_at = $res['created'];
 						$planet->updated_at = $res['edited'];
 						$planet->save();
-						echo $i . "boom \n";
+						echo "Planet: " . $i . "\n";
 					} else {
-						echo $i . "pas boom \n";
+						echo "Empty: " . $i . "\n";
 					}
 				}
 				if ($endpoint == "https://swapi.dev/api/vehicles/") {
@@ -115,9 +115,9 @@ class ScrapeData extends Command
 						$vehicle->created_at = $res['created'];
 						$vehicle->updated_at = $res['edited'];
 						$vehicle->save();
-						echo $i . "boom \n";
+						echo "Vehicle: " . $i . "\n";
 					} else {
-						echo $i . "pas boom \n";
+						echo "Empty: " . $i . "\n";
 					}
 				}
 				if ($endpoint == "https://swapi.dev/api/people/") {
@@ -136,9 +136,9 @@ class ScrapeData extends Command
 						$people->created_at = $res['created'];
 						$people->updated_at = $res['edited'];
 						$people->save();
-						echo $i . "boom \n";
+						echo "People: " . $i . "\n";
 					} else {
-						echo $i . "pas boom \n";
+						echo "Empty: " . $i . "\n";
 					}
 				}
 				if ($endpoint == "https://swapi.dev/api/films/") {
@@ -155,9 +155,9 @@ class ScrapeData extends Command
 						$film->created_at = $res['created'];
 						$film->updated_at = $res['edited'];
 						$film->save();
-						echo $i . "boom \n";
+						echo "Film: " . $i . "\n";
 					} else {
-						echo $i . "pas boom \n";
+						echo "Empty: " . $i . "\n";
 					}
 				}
 				if ($endpoint == "https://swapi.dev/api/starships/") {
@@ -181,9 +181,9 @@ class ScrapeData extends Command
 						$starship->created_at = $res['created'];
 						$starship->updated_at = $res['edited'];
 						$starship->save();
-						echo $i . "boom \n";
+						echo "Starship: " . $i . "\n";
 					} else {
-						echo $i . "pas boom \n";
+						echo "Empty: " . $i . "\n";
 					}
 				}
 				if ($endpoint == "https://swapi.dev/api/species/") {
@@ -204,13 +204,13 @@ class ScrapeData extends Command
 						$specie->created_at = $res['created'];
 						$specie->updated_at = $res['edited'];
 						$specie->save();
-						echo $i . "boom \n";
+						echo "Specie: " . $i . "\n";
 					} else {
-						echo $i . "pas boom \n";
+						echo "Empty: " . $i . "\n";
 					}
 				}
 			}
-		}*/
+		}
 		PivotPeoplePlanet::truncate();
 		PivotPeopleSpecie::truncate();
 		PivotPlanetFilm::truncate();
@@ -232,7 +232,7 @@ class ScrapeData extends Command
 						$pivotPlanetPeople = new PivotPeoplePlanet();
 						$pivotPlanetPeople->planet_id = $planet->id;
 						$pivotPlanetPeople->people_id = intval(preg_replace("/[^0-9]/", "", $peopleUrl));
-						echo 'badaboom ' . $pivotPlanetPeople->people_id;
+						echo 'Relation People Planet: ' . $pivotPlanetPeople->people_id;
 						$pivotPlanetPeople->save();
 					}
 
@@ -240,7 +240,7 @@ class ScrapeData extends Command
 						$pivotPlanetFilm = new PivotPlanetFilm();
 						$pivotPlanetFilm->planet_id = $planet->id;
 						$pivotPlanetFilm->film_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
-						echo 'badaboom ' . $pivotPlanetFilm->film_id;
+						echo 'Relation Film Planet: ' . $pivotPlanetFilm->film_id;
 						$pivotPlanetFilm->save();
 					}
 				}
@@ -256,7 +256,7 @@ class ScrapeData extends Command
 						$pivotPeopleVehicle = new PivotPeopleVehicle();
 						$pivotPeopleVehicle->vehicle_id = $vehicle->id;
 						$pivotPeopleVehicle->people_id = intval(preg_replace("/[^0-9]/", "", $vehicleUrl));
-						echo 'badaboom ' . $pivotPeopleVehicle->people_id;
+						echo 'Relation People Vehicle: ' . $pivotPeopleVehicle->people_id;
 						$pivotPeopleVehicle->save();
 					}
 
@@ -264,7 +264,7 @@ class ScrapeData extends Command
 						$pivotFilmVehicle = new PivotFilmVehicle();
 						$pivotFilmVehicle->vehicle_id = $vehicle->id;
 						$pivotFilmVehicle->film_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
-						echo 'badaboom ' . $pivotFilmVehicle->film_id;
+						echo 'Relation Film Vehicle: ' . $pivotFilmVehicle->film_id;
 						$pivotFilmVehicle->save();
 					}
 				}
@@ -279,7 +279,7 @@ class ScrapeData extends Command
 						$pivotPeopleFilm = new pivotPeopleFilm();
 						$pivotPeopleFilm->film_id = $film->id;
 						$pivotPeopleFilm->people_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
-						echo 'badaboom ' . $pivotPeopleFilm->people_id;
+						echo 'Relation People Film: ' . $pivotPeopleFilm->people_id;
 						$pivotPeopleFilm->save();
 					}
 				}
@@ -294,7 +294,7 @@ class ScrapeData extends Command
 						$pivotPeopleStarship = new pivotPeopleStarship();
 						$pivotPeopleStarship->starship_id = $starship->id;
 						$pivotPeopleStarship->people_id = intval(preg_replace("/[^0-9]/", "", $starshipUrl));
-						echo 'badaboom ' . $pivotPeopleStarship->people_id;
+						echo 'Relation People Starship: ' . $pivotPeopleStarship->people_id;
 						$pivotPeopleStarship->save();
 					}
 
@@ -302,7 +302,7 @@ class ScrapeData extends Command
 						$pivotFilmStarship = new PivotFilmStarship();
 						$pivotFilmStarship->starship_id = $starship->id;
 						$pivotFilmStarship->film_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
-						echo 'badaboom ' . $pivotFilmStarship->film_id;
+						echo 'Relation Film Starship: ' . $pivotFilmStarship->film_id;
 						$pivotFilmStarship->save();
 					}
 				}
@@ -316,7 +316,7 @@ class ScrapeData extends Command
 						$pivotPeopleSpecie = new pivotPeopleSpecie();
 						$pivotPeopleSpecie->specie_id = $specie->id;
 						$pivotPeopleSpecie->people_id = intval(preg_replace("/[^0-9]/", "", $specieUrl));
-						echo 'badaboom ' . $pivotPeopleSpecie->people_id;
+						echo 'Relation People Specie: ' . $pivotPeopleSpecie->people_id;
 						$pivotPeopleSpecie->save();
 					}
 
@@ -324,7 +324,7 @@ class ScrapeData extends Command
 						$pivotFilmSpecie = new pivotFilmSpecie();
 						$pivotFilmSpecie->specie_id = $specie->id;
 						$pivotFilmSpecie->film_id = intval(preg_replace("/[^0-9]/", "", $filmUrl));
-						echo 'badaboom ' . $pivotFilmSpecie->film_id;
+						echo 'Relation Film Specie: ' . $pivotFilmSpecie->film_id;
 						$pivotFilmSpecie->save();
 					}
 				}

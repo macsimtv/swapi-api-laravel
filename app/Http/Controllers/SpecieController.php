@@ -41,6 +41,31 @@ class SpecieController extends Controller
 	public function show()
 	{
 		$species = Specie::all();
+
+		foreach ($species as $specie) {
+			$specie_id = $specie->id;
+			$specie['url'] = route('specie', $specie_id);
+
+			// Planet
+			$planet = PivotPeoplePlanet::where('people_id', $specie_id)->first();
+			$specie['homeworld'] = route('planet', $planet->planet_id);
+
+			//People
+			$peoples = PivotPeopleSpecie::where('specie_id', $specie_id)->get();
+			$peopleArray = [];
+			foreach ($peoples as $people) {
+				$peopleArray[] = route('people', $people->people_id);
+			}
+			$specie['people'] = $peopleArray;
+
+			//Films
+			$films = PivotFilmSpecie::where('specie_id', $specie_id)->get();
+			$filmsArray = [];
+			foreach ($films as $film) {
+				$filmsArray[] = route('film', $film->film_id);
+			}
+			$specie['films'] = $filmsArray;
+		}
 		return response()->json($species);
 	}
 }
