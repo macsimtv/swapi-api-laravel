@@ -38,6 +38,6 @@ Etapes:
 - Créer un utilisateur
 	- Requête POST sur /auth/register avec dans le corp de la requête, l'utilisateur
 - Obtenir un token
-	- Requête POST sur /auth/login
+	- Requête POST sur /auth/login avec le token précedement obtenu dans le header, et les identifiants dans le corp de la requête
 
 swagger.yaml: fichier de description des routes
