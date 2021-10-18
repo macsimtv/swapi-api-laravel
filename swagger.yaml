@@ -65,6 +65,27 @@ paths:
       responses:
         "404":
           description: "Non trouvé"
+  /v1/vehicle/{id}:
+    get:
+      tags:
+        - "vehicule"
+      summary: "Retourne le véhicule avec son identifiant"
+      security:
+        - BearerAuth: [ ]
+      description: ""
+      operationId: "getVehicule"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Identifiant du véhicule"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "404":
+          description: "Non trouvé"
   /v1/films/{id}:
     get:
       tags:
