@@ -18,9 +18,10 @@ schemes:
 - "http"
 
 components:
-  BearerAuth:
-    type: http
-    scheme: bearer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
 
 paths:
   /v1/species/{id}:
