@@ -176,16 +176,6 @@ paths:
         "400":
           description: "Invalid username/password supplied"
 definitions:
-  Category:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Category"
   Starship:
     type: "object"
     properties:
