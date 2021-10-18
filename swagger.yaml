@@ -335,6 +335,47 @@ definitions:
         format: date-time
       url:
         type: "string"
+  Vehicle:
+    type: "object"
+    properties:
+      name:
+        type: 'string'
+      model:
+        type: 'string'
+      manufacturer:
+        type: 'string'
+      cost_in_credits:
+        type: 'string'
+      length:
+        type: 'string'
+      max_atmosphering_speed:
+        type: 'string'
+      crew:
+        type: 'string'
+      passengers:
+        type: 'string'
+      cargo_capacity:
+        type: 'string'
+      consumables:
+        type: 'string'
+      vehicle_class:
+        type: 'string'
+      pilots:
+        type: array
+        items:
+          $ref: '#/definitions/People'
+      films:
+        type: array
+        items:
+          $ref: '#/definitions/Film'
+      created:
+        type: "string"
+        format: date-time
+      edited:
+        type: "string"
+        format: date-time
+      url:
+        type: "string"
   People:
     type: "object"
     properties:
