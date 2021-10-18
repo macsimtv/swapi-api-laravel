@@ -33,4 +33,10 @@ class StarshipController extends Controller
 
 		return $starship;
 	}
+
+	public function show()
+	{
+		$starships = Starship::all();
+		return response()->json($starships);
+	}
 }

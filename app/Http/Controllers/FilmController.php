@@ -60,4 +60,10 @@ class FilmController extends Controller
 
 		return response()->json($film);
 	}
+
+	public function show()
+	{
+		$films = Film::all();
+		return response()->json($films);
+	}
 }
