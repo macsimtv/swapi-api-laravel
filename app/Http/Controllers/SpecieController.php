@@ -37,4 +37,10 @@ class SpecieController extends Controller
 
 		return response()->json($specie);
 	}
+
+	public function show()
+	{
+		$species = Specie::all();
+		return response()->json($species);
+	}
 }
