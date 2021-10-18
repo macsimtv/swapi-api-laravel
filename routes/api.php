@@ -32,15 +32,20 @@ Route::group([
 	Route::post('/register', [AuthController::class, 'register']);
 });
 
+Route::group([
+	'middleware' => 'auth:api',
+	'prefix' => 'auth'
+], function ($router) {
+	Route::post('/logout', [AuthController::class, 'logout']);
+	Route::post('/refresh', [AuthController::class, 'refresh']);
+	Route::get('/user-profile', [AuthController::class, 'userProfile']);
+});
 
 Route::group([
 	'middleware' => 'auth:api',
 	'prefix' => 'v1'
 
 ], function ($router) {
-	Route::post('/logout', [AuthController::class, 'logout']);
-	Route::post('/refresh', [AuthController::class, 'refresh']);
-	Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
 	Route::get('planets/{planet_id}', [PlanetController::class, 'index'])->name('planet');
 	Route::get('planets', [PlanetController::class, "show"])->name('planets');

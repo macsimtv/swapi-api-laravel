@@ -49,12 +49,12 @@ class FilmController extends Controller
 		$film['vehicles'] = $vehiclesArray;
 
 		// Species
-		// $species = PivotFilmSpecie::where('film_id', $film->id)->get();
-		// $speciesArray = [];
-		// foreach ($species as $specie) {
-		// 	$speciesArray[] = route('specie', $specie->specie_id);
-		// }
-		// $film['species'] = $speciesArray;
+		$species = PivotFilmSpecie::where('film_id', $film->id)->get();
+		$speciesArray = [];
+		foreach ($species as $specie) {
+			$speciesArray[] = route('specie', $specie->specie_id);
+		}
+		$film['species'] = $speciesArray;
 
 		$film['url'] = route('film', $film_id);
 
