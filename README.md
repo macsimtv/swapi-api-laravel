@@ -1,4 +1,4 @@
-# Readme
+# STARWARS API 
 
 Toutes les données Star Wars dont vous avez toujours rêvé :
 Planètes,  vaisseaux spatiaux, 🚗 véhicules, 🙍‍♂️ personnes, 🎬 films et 👾 espèces
@@ -38,6 +38,6 @@ Etapes:
 - Créer un utilisateur
 	- Requête POST sur /auth/register avec dans le corp de la requête, l'utilisateur
 - Obtenir un token
-	- Requête POST sur /auth/login avec le token précedement obtenu dans le header, et les identifiants dans le corp de la requête
+	- Requête POST sur /auth/login
 
 swagger.yaml: fichier de description des routes
