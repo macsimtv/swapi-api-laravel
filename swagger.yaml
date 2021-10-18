@@ -24,6 +24,18 @@ components:
       scheme: bearer
 
 paths:
+  /v1/species:
+    get:
+      tags:
+        - "species"
+      summary: "Retourne toute les espèces"
+      security:
+        - BearerAuth: []
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Renvoie la liste"
   /v1/species/{id}:
     get:
       tags:
@@ -45,6 +57,18 @@ paths:
       responses:
         "404":
           description: "Non trouvé"
+  /v1/people:
+    get:
+      tags:
+        - "species"
+      summary: "Retourne tous les "
+      security:
+        - BearerAuth: [ ]
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Renvoie la liste"
   /v1/people/{id}:
     get:
       tags:
@@ -181,7 +205,7 @@ paths:
         default:
           description: "User créer"
   /auth/login:
-    get:
+    post:
       tags:
       - "user"
       summary: "Logs user into the system"
