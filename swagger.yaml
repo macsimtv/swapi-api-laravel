@@ -16,12 +16,20 @@ tags:
   description: "Operations about user"
 schemes:
 - "http"
+
+components:
+  BearerAuth:
+    type: http
+    scheme: bearer
+
 paths:
   /v1/species/{id}:
     get:
       tags:
       - "species"
       summary: "Retourne une espèce avec son identifiant"
+      security:
+        - BearerAuth: []
       description: ""
       operationId: "getSpecies"
       produces:
@@ -41,6 +49,8 @@ paths:
       tags:
       - "films"
       summary: "Retourne un film avec son identifiant"
+      security:
+        - BearerAuth: [ ]
       description: ""
       operationId: "getFilms"
       produces:
@@ -66,6 +76,8 @@ paths:
       tags:
       - "planets"
       summary: "Retourne la planète avec son identifiant"
+      security:
+        - BearerAuth: [ ]
       description: ""
       operationId: "getPlanets"
       produces:
@@ -89,6 +101,8 @@ paths:
       tags:
         - "startships"
       summary: "Retourne le vaisseau avec son identifiant"
+      security:
+        - BearerAuth: [ ]
       description: ""
       operationId: "getStartships"
       produces:
@@ -107,11 +121,29 @@ paths:
             type: "string"
             items:
               $ref: "#/definitions/Starship"
-  /auth/user/login:
+  /auth/register:
+    post:
+      tags:
+        - "user"
+      summary: "Création d'utilisateur"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        default:
+          description: "User créer"
+  /auth/login:
     get:
       tags:
       - "user"
       summary: "Logs user into the system"
+      security:
+        - BearerAuth: [ ]
       description: ""
       operationId: "loginUser"
       produces:
@@ -368,11 +400,7 @@ definitions:
       id:
         type: "integer"
         format: "int64"
-      username:
-        type: "string"
-      firstName:
-        type: "string"
-      lastName:
+      name:
         type: "string"
       email:
         type: "string"
