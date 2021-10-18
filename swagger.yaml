@@ -1,0 +1,267 @@
+swagger: "2.0"
+info:
+  description: "Star Wars API"
+  version: "1.0.0"
+  title: "swapi"
+host: "localhost"
+basePath: "/api/auth"
+tags:
+- name: "species"
+  description: "Les espèces"
+- name: "films"
+  description: "Les films"
+- name: "planets"
+  description: "Les planètes"
+- name: "user"
+  description: "Operations about user"
+schemes:
+- "http"
+paths:
+  /species/{id}:
+    get:
+      tags:
+      - "species"
+      summary: "Retourne une espèce avec son identifiant"
+      description: ""
+      operationId: "getSpecies"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifiant de l'espèce"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "404":
+          description: "Non trouvé"
+  /films/{id}:
+    get:
+      tags:
+      - "films"
+      summary: "Retourne un film avec son identifiant"
+      description: ""
+      operationId: "getFilms"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Identifiant du film"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Film"
+        "400":
+          description: "Invalid status value"
+  /planets/{id}:
+    get:
+      tags:
+      - "planets"
+      summary: "Retourne la planète avec son identifiant"
+      description: ""
+      operationId: "getPlanets"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "identifiant de la planète"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "récupération réussie"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Planet"
+  /starship/{id}:
+    get:
+      tags:
+        - "startships"
+      summary: "Retourne le vaisseau avec son identifiant"
+      description: ""
+      operationId: "getStartships"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "identifiant du vaisseau"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "récupération réussie"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Starship"
+  /user/login:
+    get:
+      tags:
+      - "user"
+      summary: "Logs user into the system"
+      description: ""
+      operationId: "loginUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "The user name for login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "string"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        "400":
+          description: "Invalid username/password supplied"
+definitions:
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Category"
+  Starship:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      model:
+        type: "string"
+      manufacturer:
+        type: "string"
+      cost_in_credits:
+        type: "integer"
+      length:
+        type: "string"
+      max_atmosphering_speed:
+        type: "string"
+      crew:
+        type: "string"
+      passengers:
+        type: "string"
+      cargo_capacity:
+        type: "string"
+      consumables:
+        type: "string"
+      hyperdrive_rating:
+        type: "string"
+      mglt:
+        type: "string"
+      starship_class:
+        type: "string"
+      pilots:
+        type: array
+        items:
+          $ref: '#/component/schemas/User'
+      films:
+        type: array
+        items:
+          $ref: '#/components/schemas/Film'
+      created:
+        type: "string"
+      edited:
+        type: "string"
+      url:
+        type: "string"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "User"
+  Tag:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Tag"
+  Pet:
+    type: "object"
+    required:
+    - "name"
+    - "photoUrls"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      category:
+        $ref: "#/definitions/Category"
+      name:
+        type: "string"
+        example: "doggie"
+      photoUrls:
+        type: "array"
+        xml:
+          name: "photoUrl"
+          wrapped: true
+        items:
+          type: "string"
+      tags:
+        type: "array"
+        xml:
+          name: "tag"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Tag"
+      status:
+        type: "string"
+        description: "pet status in the store"
+        enum:
+        - "available"
+        - "pending"
+        - "sold"
+    xml:
+      name: "Pet"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
