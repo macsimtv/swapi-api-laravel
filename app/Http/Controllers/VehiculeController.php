@@ -33,4 +33,10 @@ class VehiculeController extends Controller
 
 		return $vehicle;
 	}
+
+	public function show()
+	{
+		$vehicles = Vehicle::all();
+		return response()->json($vehicles);
+	}
 }

@@ -33,4 +33,10 @@ class PlanetController extends Controller
 
 		return response()->json($planet);
 	}
+
+	public function show()
+	{
+		$planets = Planet::all();
+		return response()->json($planets);
+	}
 }

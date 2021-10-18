@@ -4,7 +4,7 @@ info:
   version: "1.0.0"
   title: "swapi"
 host: "localhost"
-basePath: "/api/auth"
+basePath: "/api"
 tags:
 - name: "species"
   description: "Les espèces"
@@ -17,7 +17,7 @@ tags:
 schemes:
 - "http"
 paths:
-  /species/{id}:
+  /v1/species/{id}:
     get:
       tags:
       - "species"
@@ -36,7 +36,7 @@ paths:
       responses:
         "404":
           description: "Non trouvé"
-  /films/{id}:
+  /v1/films/{id}:
     get:
       tags:
       - "films"
@@ -61,7 +61,7 @@ paths:
               $ref: "#/definitions/Film"
         "400":
           description: "Invalid status value"
-  /planets/{id}:
+  /v1/planets/{id}:
     get:
       tags:
       - "planets"
@@ -84,7 +84,7 @@ paths:
             type: "string"
             items:
               $ref: "#/definitions/Planet"
-  /starship/{id}:
+  /v1/starship/{id}:
     get:
       tags:
         - "startships"
@@ -107,7 +107,7 @@ paths:
             type: "string"
             items:
               $ref: "#/definitions/Starship"
-  /user/login:
+  /auth/user/login:
     get:
       tags:
       - "user"
@@ -186,15 +186,180 @@ definitions:
       pilots:
         type: array
         items:
-          $ref: '#/component/schemas/User'
+          $ref: '#/definitions/User'
       films:
         type: array
         items:
-          $ref: '#/components/schemas/Film'
+          $ref: '#/definitions/Film'
       created:
         type: "string"
+        format: date-time
       edited:
         type: "string"
+        format: date-time
+      url:
+        type: "string"
+  Film:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      episode_id:
+        type: "integer"
+      opening_crawl:
+        type: "string"
+      director:
+        type: "string"
+      producer:
+        type: "string"
+      release_date:
+        type: "string"
+        format: date
+      characters:
+        type: array
+        items:
+          $ref: '#/definitions/People'
+      planets:
+        type: array
+        items:
+          $ref: '#/definitions/Planet'
+      starships:
+        type: array
+        items:
+          $ref: '#/definitions/Starship'
+      vehicles:
+        type: array
+        items:
+          $ref: '#/definitions/Vehicle'
+      species:
+        type: array
+        items:
+          $ref: '#/definitions/Specie'
+      created:
+        type: "string"
+        format: date-time
+      edited:
+        type: "string"
+        format: date-time
+      url:
+        type: "string"
+  Planet:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      rotation_period:
+        type: "string"
+      orbital_period:
+        type: "string"
+      diameter:
+        type: "string"
+      climate:
+        type: "string"
+      gravity:
+        type: "string"
+      terrain:
+        type: "string"
+      surface_water:
+        type: "string"
+      population:
+        type: "string"
+      residents:
+        type: array
+        items:
+          $ref: '#/definitions/People'
+      films:
+        type: array
+        items:
+          $ref: '#/definitions/Film'
+      created:
+        type: "string"
+        format: date-time
+      edited:
+        type: "string"
+        format: date-time
+      url:
+        type: "string"
+  People:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      height:
+        type: "string"
+      mass:
+        type: "string"
+      hair_color:
+        type: "string"
+      skin_color:
+        type: "string"
+      eye_color:
+        type: "string"
+      birth_year:
+        type: "string"
+      gender:
+        type: "string"
+      homeworld:
+        type: "string"
+      films:
+        type: array
+        items:
+          $ref: '#/definitions/Film'
+      species:
+        type: array
+        items:
+          $ref: '#/definitions/Specie'
+      vehicle:
+        type: array
+        items:
+          $ref: '#/definitions/Vehicle'
+      starships:
+        type: array
+        items:
+          $ref: '#/definitions/Starship'
+      created:
+        type: "string"
+        format: date-time
+      edited:
+        type: "string"
+        format: date-time
+      url:
+        type: "string"
+  Specie:
+    type: 'object'
+    properties:
+      name:
+        type: 'string'
+      classification:
+        type: 'string'
+      designation:
+        type: 'string'
+      average_height:
+        type: 'string'
+      skin_color:
+        type: 'string'
+      hair_color:
+        type: 'string'
+      eye_colors:
+        type: 'string'
+      average_lifespan:
+        type: 'string'
+      homeworld:
+        type: 'string'
+      people:
+        type: array
+        items:
+          $ref: '#/definitions/People'
+      films:
+        type: array
+        items:
+          $ref: '#/definitions/Film'
+      created:
+        type: "string"
+        format: date-time
+      edited:
+        type: "string"
+        format: date-time
       url:
         type: "string"
   User:
@@ -225,43 +390,6 @@ definitions:
         type: "string"
     xml:
       name: "Tag"
-  Pet:
-    type: "object"
-    required:
-    - "name"
-    - "photoUrls"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
-        type: "string"
-        example: "doggie"
-      photoUrls:
-        type: "array"
-        xml:
-          name: "photoUrl"
-          wrapped: true
-        items:
-          type: "string"
-      tags:
-        type: "array"
-        xml:
-          name: "tag"
-          wrapped: true
-        items:
-          $ref: "#/definitions/Tag"
-      status:
-        type: "string"
-        description: "pet status in the store"
-        enum:
-        - "available"
-        - "pending"
-        - "sold"
-    xml:
-      name: "Pet"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"

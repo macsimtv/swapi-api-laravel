@@ -49,7 +49,7 @@ Route::group([
 	Route::get('films/{film_id}', [FilmController::class, 'index'])->name('film');
 	Route::get('films', [FilmController::class, "show"])->name('films');
 	Route::get('starships/{startship_id}', [StarshipController::class, 'index'])->name('starship');
-	Route::get('startships', [StarshipController::class, "show"])->name('starships');
+	Route::get('starships', [StarshipController::class, "show"])->name('starships');
 	Route::get('vehicles/{vehicle_id}', [VehiculeController::class, 'index'])->name('vehicle');
 	Route::get('vehicles', [VehiculeController::class, "show"])->name('vehicles');
 	Route::get('/species/{specie_id}', [SpecieController::class, 'index'])->name('specie');
