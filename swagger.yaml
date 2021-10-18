@@ -4,7 +4,7 @@ info:
   version: "1.0.0"
   title: "swapi"
 host: "localhost"
-basePath: "/api/auth"
+basePath: "/api"
 tags:
 - name: "species"
   description: "Les espèces"
@@ -17,7 +17,7 @@ tags:
 schemes:
 - "http"
 paths:
-  /species/{id}:
+  /v1/species/{id}:
     get:
       tags:
       - "species"
@@ -36,7 +36,7 @@ paths:
       responses:
         "404":
           description: "Non trouvé"
-  /films/{id}:
+  /v1/films/{id}:
     get:
       tags:
       - "films"
@@ -61,7 +61,7 @@ paths:
               $ref: "#/definitions/Film"
         "400":
           description: "Invalid status value"
-  /planets/{id}:
+  /v1/planets/{id}:
     get:
       tags:
       - "planets"
@@ -84,7 +84,7 @@ paths:
             type: "string"
             items:
               $ref: "#/definitions/Planet"
-  /starship/{id}:
+  /v1/starship/{id}:
     get:
       tags:
         - "startships"
@@ -107,7 +107,7 @@ paths:
             type: "string"
             items:
               $ref: "#/definitions/Starship"
-  /user/login:
+  /auth/user/login:
     get:
       tags:
       - "user"
@@ -186,15 +186,106 @@ definitions:
       pilots:
         type: array
         items:
-          $ref: '#/component/schemas/User'
+          $ref: '#/components/schemas/User'
       films:
         type: array
         items:
           $ref: '#/components/schemas/Film'
       created:
         type: "string"
+        format: date-time
       edited:
         type: "string"
+        format: date-time
+      url:
+        type: "string"
+  Film:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      episode_id:
+        type: "integer"
+      opening_crawl:
+        type: "string"
+      director:
+        type: "string"
+      producer:
+        type: "string"
+      release_date:
+        type: "string"
+        format: date
+      characters:
+        type: array
+        items:
+          $ref: '#/components/schemas/People'
+      planets:
+        type: array
+        items:
+          $ref: '#/components/schemas/Planet'
+      starships:
+        type: array
+        items:
+          $ref: '#/components/schemas/Starship'
+      vehicles:
+        type: array
+        items:
+          $ref: '#/components/schemas/Vehicle'
+      species:
+        type: array
+        items:
+          $ref: '#/components/schemas/Specie'
+      created:
+        type: "string"
+        format: date-time
+      edited:
+        type: "string"
+        format: date-time
+      url:
+        type: "string"
+  People:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      height:
+        type: "string"
+      mass:
+        type: "string"
+      hair_color:
+        type: "string"
+      skin_color:
+        type: "string"
+      eye_color:
+        type: "string"
+      birth_year:
+        type: "string"
+      gender:
+        type: "string"
+      homeworld:
+        type: "string"
+      films:
+        type: array
+        items:
+          $ref: '#/components/schemas/Film'
+      species:
+        type: array
+        items:
+          $ref: '#/components/schemas/Specie'
+      vehicle:
+        type: array
+        items:
+          $ref: '#/components/schemas/Vehicle'
+      starships:
+        type: array
+        items:
+          $ref: '#/components/schemas/Starship'
+      created:
+        type: "string"
+        format: date-time
+      edited:
+        type: "string"
+        format: date-time
       url:
         type: "string"
   User:
