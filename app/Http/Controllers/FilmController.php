@@ -48,7 +48,7 @@ class FilmController extends Controller
 		}
 		$film['vehicles'] = $vehiclesArray;
 
-		//Species
+		// Species
 		$species = PivotFilmSpecie::where('film_id', $film->id)->get();
 		$speciesArray = [];
 		foreach ($species as $specie) {
