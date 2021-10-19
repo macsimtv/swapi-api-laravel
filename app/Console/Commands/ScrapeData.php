@@ -190,6 +190,8 @@ class ScrapeData extends Command
 								$specie->eye_colors = $res['eye_colors'];
 								$specie->average_lifespan = $res['average_lifespan'];
 								$specie->language = $res['language'];
+								$planet_id = ($res['homeworld']) ? intval(preg_replace("/[^0-9]/", "", $res['homeworld'])) : null;
+								$specie->homeworld = $planet_id;
 								$specie->created_at = $res['created'];
 								$specie->updated_at = $res['edited'];
 								$specie->save();

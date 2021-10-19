@@ -14,10 +14,7 @@ class SpecieController extends Controller
 	{
 		$specie = Specie::find($specie_id);
 		$specie['url'] = route('specie', $specie_id);
-
-		// Planet
-		$planet = PivotPeoplePlanet::where('people_id', $specie_id)->first();
-		$specie['homeworld'] = route('planet', $planet->planet_id);
+		($specie['homeworld']) ? $specie['homeworld'] = route('planet', $specie['homeworld']) : $specie['homeworld'] = null;
 
 		//People
 		$peoples = PivotPeopleSpecie::where('specie_id', $specie_id)->get();
@@ -45,11 +42,7 @@ class SpecieController extends Controller
 		foreach ($species as $specie) {
 			$specie_id = $specie->id;
 			$specie['url'] = route('specie', $specie_id);
-
-			// Planet
-			$planet = PivotPeoplePlanet::where('people_id', $specie_id)->first();
-			$specie['homeworld'] = route('planet', $planet->planet_id);
-
+			($specie['homeworld']) ? $specie['homeworld'] = route('planet', $specie['homeworld']) : $specie['homeworld'] = null;
 			//People
 			$peoples = PivotPeopleSpecie::where('specie_id', $specie_id)->get();
 			$peopleArray = [];
