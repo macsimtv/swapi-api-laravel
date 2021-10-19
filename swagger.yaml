@@ -307,6 +307,8 @@ paths:
 
   /auth/logout:
     post:
+			security:
+        - Bearer: []
       tags:
         - "User"
       summary: "disconnecting from an account voluntarily"
@@ -324,6 +326,8 @@ paths:
 
   /auth/refresh:
     post:
+			security:
+        - Bearer: []
       tags:
         - "User"
       summary: "disconnecting from an account voluntarily"
