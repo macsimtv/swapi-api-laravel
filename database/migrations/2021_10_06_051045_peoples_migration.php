@@ -23,6 +23,10 @@ class PeoplesMigration extends Migration
 			$table->string('eye_color');
 			$table->string('birth_year');
 			$table->string('gender');
+			$table->unsignedBigInteger('homeworld')->nullable();
+			$table->foreign('homeworld')->references('id')->on('planets')
+				->onDelete('cascade')
+				->onUpdate('cascade');
 			$table->timestamps();
 			$table->string('url')->nullable();
 		});

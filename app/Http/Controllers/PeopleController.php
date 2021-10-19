@@ -19,8 +19,7 @@ class PeopleController extends Controller
 		$people['url'] = route('people', $people_id);
 
 		// Planet
-		$planet = PivotPeoplePlanet::where('people_id', $people_id)->first();
-		$planet['homeworld'] = route('planet', $planet->planet_id);
+		($people['homeworld']) ? $people['homeworld'] = route('planet', $people['homeworld']) : $people['homeworld'] = null;
 
 		// Films
 		$films = PivotPeopleFilm::where('people_id', $people_id)->get();
@@ -66,8 +65,7 @@ class PeopleController extends Controller
 			$people['url'] = route('people', $people_id);
 
 			// Planet
-			$planet = PivotPeoplePlanet::where('people_id', $people_id)->first();
-			$planet['homeworld'] = route('planet', $planet->planet_id);
+			($people['homeworld']) ? $people['homeworld'] = route('planet', $people['homeworld']) : $people['homeworld'] = null;
 
 			// Films
 			$films = PivotPeopleFilm::where('people_id', $people_id)->get();

@@ -130,6 +130,8 @@ class ScrapeData extends Command
 								$people->eye_color = $res['eye_color'];
 								$people->birth_year = $res['birth_year'];
 								$people->gender = $res['gender'];
+								$planet_id = ($res['homeworld']) ? intval(preg_replace("/[^0-9]/", "", $res['homeworld'])) : null;
+								$people->homeworld = $planet_id;
 								$people->created_at = $res['created'];
 								$people->updated_at = $res['edited'];
 								$people->save();
