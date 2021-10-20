@@ -59,3 +59,7 @@ Cette commande récupère les données pour les insérer dans la base de donnée
 ## Test de fonctionnement
 
 Afin de tester le bon fonctionnement, et la présence des données, vous pouvez utiliser le swagger à travers un éditeur en ligne (https://editor.swagger.io/)
+
+### Développeur
+
+Romain Buisson - Maxime Lecouturier - Aya Haddad - Romain Neil
